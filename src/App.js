@@ -12,9 +12,15 @@ const App = () => {
     <Router>
       <Header />
       <Switch>
-        <Route exact path="/" component={mainPage} />
-        <Route exact path="/upload" component={uploadPage} />
-        <Route exact path="/login" component={signInSignUp} />
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route exact path="/upload">
+          <UploadPage />
+        </Route>
+        <Route exact path="/login">
+          <LoginPage />
+        </Route>
       </Switch>
     </Router>
   );
