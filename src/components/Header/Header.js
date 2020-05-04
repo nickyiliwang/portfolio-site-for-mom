@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Drawer from "./MuiDrawers";
 
 export const Header = () => {
   return (
     <div>
+      <Drawer />
       <nav>
         <ul>
           <li>
