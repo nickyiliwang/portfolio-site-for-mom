@@ -1,169 +1,168 @@
-import React from "react";
-import PropTypes from "prop-types";
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
+import React, { useState } from "react";
+// firebase
+import * as firebase from "firebase/app";
+import "firebase/auth";
+// router
+import { useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+// mui
+import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-// Router
-import { Link } from "react-router-dom";
-// Mui Icons
+// mui icons
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import HomeIcon from "@material-ui/icons/Home";
-import BackupIcon from "@material-ui/icons/Backup";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import IconButton from "@material-ui/core/IconButton";
+import Warning from "@material-ui/icons/Warning";
+import PermIdentity from "@material-ui/icons/PermIdentity";
+import HowToVote from "@material-ui/icons/HowToVote";
+import Ballot from "@material-ui/icons/Ballot";
+import Tooltip from "@material-ui/core/Tooltip";
 
-const drawerWidth = 240;
-
+// mui
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
+  list: {
+    width: "250px",
+    overflow: "hidden",
   },
-  drawer: {
-    [theme.breakpoints.up("sm")]: {
-      width: drawerWidth,
-      flexShrink: 0,
+  fullList: {
+    width: "auto",
+  },
+  // these buttons will be aligned to right side of abbBar
+  toolbarButtonsRight: {
+    [theme.breakpoints.down("335")]: {
+      marginLeft: "0",
+    },
+    [theme.breakpoints.up("335")]: {
+      marginLeft: "auto",
     },
   },
-  appBar: {
-    [theme.breakpoints.up("sm")]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
-  // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
+  listItemText: {
+    color: "#247ba0",
+    width: "200px",
   },
 }));
 
-function ResponsiveDrawer(props) {
-  const { window } = props;
-  const classes = useStyles();
-  const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+// router active style
+const activeStyleConfig = {
+  borderBottom: "3px solid #ff1654",
+  width: "60%",
+  overflow: "hidden",
+};
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+function MuiDrawer(props) {
+  const classes = useStyles();
+  // react hooks
+  const [state, setState] = useState({
+    left: false,
+  });
+
+  const toggleDrawer = (side, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [side]: open });
   };
 
-  const drawer = (
-    <div>
-      <div className={classes.toolbar} />
-      <Divider />
+  // renders the always appearing list of nav icon buttons
+  const sideList = (side) => (
+    <div
+      className={classes.list}
+      role="presentation"
+      onClick={toggleDrawer(side, false)}
+      onKeyDown={toggleDrawer(side, false)}
+    >
+      <IconButton onClick={toggleDrawer(side, false)}>
+        <ChevronRightIcon />
+      </IconButton>
       <List>
-        {[
-          ["Home Page", "/", "HomeIcon"],
-          ["Home Page", "/", "HomeIcon"],
-          ["Home Page", "/", "HomeIcon"],
-        ].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              <Link to="/" />
-            </ListItemIcon>
-            <ListItemText primary={text[0]} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["Home Page", "Upload", "Login"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+
+
+        <ListItem button key="User Profile">
+          <ListItemIcon>
+            <PermIdentity />
+          </ListItemIcon>
+          <NavLink activeStyle={activeStyleConfig} to="/user">
+            <ListItemText
+              primary="User Profile"
+              className={classes.listItemText}
+            />
+          </NavLink>
+        </ListItem>
+
+        <ListItem button key="Chonder">
+          <ListItemIcon>
+            <HowToVote />
+          </ListItemIcon>
+          <NavLink activeStyle={activeStyleConfig} to="/chonder">
+            <ListItemText primary="Chonder" className={classes.listItemText} />
+          </NavLink>
+        </ListItem>
+
+        <ListItem button key="Hall of Chonks">
+          <ListItemIcon>
+            <Ballot />
+          </ListItemIcon>
+          <NavLink activeStyle={activeStyleConfig} to="/hall">
+            <ListItemText
+              primary="Hall of Chonks"
+              className={classes.listItemText}
+            />
+          </NavLink>
+        </ListItem>
       </List>
     </div>
   );
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
+    <div className="wrapper">
+      <>
+        {/* nav */}
+        <Tooltip title="Navigation">
+          <Button onClick={toggleDrawer("left", true)}>
             <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden smUp implementation="css">
-          <Drawer
-            container={container}
-            variant="temporary"
-            anchor={theme.direction === "rtl" ? "right" : "left"}
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-        <Hidden xsDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-      </nav>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Typography paragraph>Content</Typography>
-      </main>
+          </Button>
+        </Tooltip>
+        {/* home */}
+        <Tooltip title="Home">
+          <Button component={NavLink} to="/">
+            <HomeIcon />
+          </Button>
+        </Tooltip>
+        {/* Upload */}
+        <Tooltip title="Upload">
+          <Button component={NavLink} to="/upload">
+            <CloudUploadIcon />
+          </Button>
+        </Tooltip>
+        {/* Login */}
+        <Tooltip title="Login">
+          <Button component={NavLink} to="/login">
+            <LockOpenIcon />
+          </Button>
+        </Tooltip>
+      </>
+
+      <Drawer
+        anchor="left"
+        open={state.left}
+        onClose={toggleDrawer("left", false)}
+      >
+        {sideList("left")}
+      </Drawer>
     </div>
   );
 }
 
-ResponsiveDrawer.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
-};
-
-export default ResponsiveDrawer;
+export default MuiDrawer;

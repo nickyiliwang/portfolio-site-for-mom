@@ -1,7 +1,7 @@
 import React from "react";
 
 const HomePage = () => (
-  <div>
+  <div className="wrapper">
     <h1>HomePage</h1>
   </div>
 );
