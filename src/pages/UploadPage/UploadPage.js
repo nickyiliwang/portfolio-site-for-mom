@@ -6,6 +6,8 @@ const UploadPage = (props) => {
   return (
     <section className="upload-page">
       <h2>Please Upload your work here</h2>
+
+      {/* ideally a dropZone */}
       <form>
         <label for="submit">
           <input name="submit" type="submit" />
