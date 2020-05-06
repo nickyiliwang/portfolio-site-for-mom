@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import firebase, { firestore } from "../../util/firebaseApp";
+import { v4 as uuidv4 } from "uuid";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -18,14 +19,15 @@ const StyledDiv = styled.div`
 `;
 
 export default function MyDropzone() {
-  const storageRef = firebase.storage().ref();
-
   const onDrop = useCallback((acceptedFiles) => {
+    const storageRef = firebase.storage().ref();
+
     acceptedFiles.forEach((file) => {
       if (!file.path.match(/.(jpg|jpeg|png|gif)$/i))
         console.log("not an image");
 
       const userId = `Nick Wang's artwork`;
+      const artworkDbRef = firestore.collection("artwork").doc(userId);
 
       //   // Upload the image to Cloud Storage.
       let filePath = `${userId}/${file.path}`;
@@ -45,31 +47,26 @@ export default function MyDropzone() {
                 .get()
                 .then((doc) => {
                   if (doc.exists) {
-                    firestore
-                      .collection("artwork")
-                      .doc(userId)
-                      .update({
-                        // pushing new items into the item array
-                        items: firebase.firestore.FieldValue.arrayUnion({
+                    artworkDbRef.update({
+                      // pushing new items into the item array
+                      items: firebase.firestore.FieldValue.arrayUnion({
+                        title: file.name,
+                        imageUrl: url,
+                        timeStamp: Date.now(),
+                        id: uuidv4(),
+                      }),
+                    });
+                  } else {
+                    artworkDbRef.set({
+                      items: [
+                        {
                           title: file.name,
                           imageUrl: url,
                           timeStamp: Date.now(),
-                        }),
-                      });
-                  } else {
-                    firestore
-                      .collection("artwork")
-                      .doc(userId)
-                      .set({
-                        // pushing new items into the item array
-                        items: [
-                          {
-                            title: file.name,
-                            imageUrl: url,
-                            timeStamp: Date.now(),
-                          },
-                        ],
-                      });
+                          id: uuidv4(),
+                        },
+                      ],
+                    });
                   }
                 })
                 .catch(function (error) {
@@ -94,12 +91,3 @@ export default function MyDropzone() {
     </StyledDiv>
   );
 }
-
-// washingtonRef.update({
-//     regions: firebase.firestore.FieldValue.arrayUnion("greater_virginia")
-// });
-
-// // Atomically remove a region from the "regions" array field.
-// washingtonRef.update({
-//     regions: firebase.firestore.FieldValue.arrayRemove("east_coast")
-// });

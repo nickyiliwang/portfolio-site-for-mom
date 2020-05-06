@@ -9,20 +9,22 @@ import { Header } from "./components/Header/Header";
 
 const App = () => {
   return (
-    <Router>
-      <Header />
-      <Switch>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
-        <Route exact path="/upload">
-          <UploadPage />
-        </Route>
-        <Route exact path="/login">
-          <LoginPage />
-        </Route>
-      </Switch>
-    </Router>
+    <div className="wrapper">
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route exact path="/upload">
+            <UploadPage />
+          </Route>
+          <Route exact path="/login">
+            <LoginPage />
+          </Route>
+        </Switch>
+      </Router>
+    </div>
   );
 };
 

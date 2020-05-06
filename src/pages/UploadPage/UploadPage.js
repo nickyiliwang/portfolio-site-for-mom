@@ -1,8 +1,14 @@
 import React from "react";
-import MyDropzone from "./DropZone";
+import MyDropzone from "../../components/Dropzone/DropZone";
 import { firestore } from "../../util/firebaseApp";
+import styled from "styled-components";
+import DisplayArtwork from "../../components/DisplayArtwork/DisplayArtwork";
 
-const UploadPage = (props) => {
+const StyledImageDiv = styled.div`
+  width: 400px;
+`;
+
+const UploadPage = () => {
   const [state, setstate] = React.useState({});
 
   React.useEffect(() => {
@@ -10,11 +16,8 @@ const UploadPage = (props) => {
     firestore
       .collection("artwork")
       .doc(tempUser)
-      .onSnapshot(function (doc) {
-        console.log(
-          "Current data from useEffect: ",
-          setstate({ ...doc.data() })
-        );
+      .onSnapshot((doc) => {
+        setstate({ ...doc.data() });
       });
   }, []);
 
@@ -25,7 +28,9 @@ const UploadPage = (props) => {
       <MyDropzone />
 
       <div>Here is a list of all your artwork!</div>
-      <div className="artwork-container">{console.log(state)}</div>
+      <StyledImageDiv>
+        {state.hasOwnProperty("items") && <DisplayArtwork artworks={state} />}
+      </StyledImageDiv>
     </section>
   );
 };

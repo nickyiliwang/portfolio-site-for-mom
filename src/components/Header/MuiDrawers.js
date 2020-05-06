@@ -18,9 +18,6 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import IconButton from "@material-ui/core/IconButton";
-import PermIdentity from "@material-ui/icons/PermIdentity";
-import HowToVote from "@material-ui/icons/HowToVote";
-import Ballot from "@material-ui/icons/Ballot";
 import Tooltip from "@material-ui/core/Tooltip";
 
 // mui
@@ -47,14 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// router active style
-const activeStyleConfig = {
-  borderBottom: "3px solid #ff1654",
-  width: "60%",
-  overflow: "hidden",
-};
-
-function MuiDrawer(props) {
+function MuiDrawer() {
   const classes = useStyles();
   // react hooks
   const [state, setState] = useState({
@@ -84,36 +74,30 @@ function MuiDrawer(props) {
         <ChevronRightIcon />
       </IconButton>
       <List>
-        <ListItem button key="User Profile">
+        <ListItem button key="Home">
           <ListItemIcon>
-            <PermIdentity />
+            <HomeIcon />
           </ListItemIcon>
-          <NavLink activeStyle={activeStyleConfig} to="/user">
-            <ListItemText
-              primary="User Profile"
-              className={classes.listItemText}
-            />
+          <NavLink to="/">
+            <ListItemText primary="Home" className={classes.listItemText} />
           </NavLink>
         </ListItem>
 
-        <ListItem button key="Chonder">
+        <ListItem button key="Upload">
           <ListItemIcon>
-            <HowToVote />
+            <CloudUploadIcon />
           </ListItemIcon>
-          <NavLink activeStyle={activeStyleConfig} to="/chonder">
-            <ListItemText primary="Chonder" className={classes.listItemText} />
+          <NavLink to="/upload">
+            <ListItemText primary="Upload" className={classes.listItemText} />
           </NavLink>
         </ListItem>
 
-        <ListItem button key="Hall of Chonks">
+        <ListItem button key="Login">
           <ListItemIcon>
-            <Ballot />
+            <LockOpenIcon />
           </ListItemIcon>
-          <NavLink activeStyle={activeStyleConfig} to="/hall">
-            <ListItemText
-              primary="Hall of Chonks"
-              className={classes.listItemText}
-            />
+          <NavLink to="/login">
+            <ListItemText primary="Login" className={classes.listItemText} />
           </NavLink>
         </ListItem>
       </List>
@@ -121,8 +105,8 @@ function MuiDrawer(props) {
   );
 
   return (
-    <div className="wrapper">
-      <>
+    <div>
+      <div>
         {/* nav */}
         <Tooltip title="Navigation">
           <Button onClick={toggleDrawer("left", true)}>
@@ -147,7 +131,7 @@ function MuiDrawer(props) {
             <LockOpenIcon />
           </Button>
         </Tooltip>
-      </>
+      </div>
 
       <Drawer
         anchor="left"
