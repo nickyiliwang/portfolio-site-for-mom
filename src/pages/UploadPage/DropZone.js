@@ -17,7 +17,7 @@ const StyledDiv = styled.div`
   margin: 10px 0;
 `;
 
-export default function MyDropzone({ callbackToReRenderArtworkPage }) {
+export default function MyDropzone() {
   const storageRef = firebase.storage().ref();
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -42,10 +42,35 @@ export default function MyDropzone({ callbackToReRenderArtworkPage }) {
               firestore
                 .collection("artwork")
                 .doc(userId)
-                .add({})
-                .then(function (docRef) {
-                  console.log("Document written with ID: ", docRef);
-                  callbackToReRenderArtworkPage(userId);
+                .get()
+                .then((doc) => {
+                  if (doc.exists) {
+                    firestore
+                      .collection("artwork")
+                      .doc(userId)
+                      .update({
+                        // pushing new items into the item array
+                        items: firebase.firestore.FieldValue.arrayUnion({
+                          title: file.name,
+                          imageUrl: url,
+                          timeStamp: Date.now(),
+                        }),
+                      });
+                  } else {
+                    firestore
+                      .collection("artwork")
+                      .doc(userId)
+                      .set({
+                        // pushing new items into the item array
+                        items: [
+                          {
+                            title: file.name,
+                            imageUrl: url,
+                            timeStamp: Date.now(),
+                          },
+                        ],
+                      });
+                  }
                 })
                 .catch(function (error) {
                   console.error("Error adding document: ", error);
@@ -69,3 +94,12 @@ export default function MyDropzone({ callbackToReRenderArtworkPage }) {
     </StyledDiv>
   );
 }
+
+// washingtonRef.update({
+//     regions: firebase.firestore.FieldValue.arrayUnion("greater_virginia")
+// });
+
+// // Atomically remove a region from the "regions" array field.
+// washingtonRef.update({
+//     regions: firebase.firestore.FieldValue.arrayRemove("east_coast")
+// });
