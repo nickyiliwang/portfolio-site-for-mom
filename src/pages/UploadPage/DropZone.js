@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import firebase, { firestore } from "../../util/firebaseApp";
-import { validate } from "./validate-image";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -29,7 +28,7 @@ export default function MyDropzone({ callbackToReRenderArtworkPage }) {
       const userId = `Nick Wang's artwork`;
 
       //   // Upload the image to Cloud Storage.
-      let filePath = userId + file.name;
+      let filePath = `${userId}/${file.path}`;
       firebase
         .storage()
         .ref(filePath)
@@ -39,19 +38,13 @@ export default function MyDropzone({ callbackToReRenderArtworkPage }) {
             .child(filePath)
             .getDownloadURL()
             .then(function (url) {
-              console.log(url);
-
-              // // then uploads the download url from
+              // then uploads the download url from
               firestore
                 .collection("artwork")
                 .doc(userId)
-                .add({
-                  title: file.name,
-                  imageUrl: url,
-                  timeStamp: Date.now(),
-                })
+                .add({})
                 .then(function (docRef) {
-                  console.log("Document written with ID: ", docRef.id);
+                  console.log("Document written with ID: ", docRef);
                   callbackToReRenderArtworkPage(userId);
                 })
                 .catch(function (error) {

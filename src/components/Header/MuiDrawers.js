@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 // firebase
-import * as firebase from "firebase/app";
 import "firebase/auth";
 // router
-import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 // mui
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,7 +18,6 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import IconButton from "@material-ui/core/IconButton";
-import Warning from "@material-ui/icons/Warning";
 import PermIdentity from "@material-ui/icons/PermIdentity";
 import HowToVote from "@material-ui/icons/HowToVote";
 import Ballot from "@material-ui/icons/Ballot";
@@ -87,8 +84,6 @@ function MuiDrawer(props) {
         <ChevronRightIcon />
       </IconButton>
       <List>
-
-
         <ListItem button key="User Profile">
           <ListItemIcon>
             <PermIdentity />

@@ -3,33 +3,27 @@ import MyDropzone from "./DropZone";
 import { firestore } from "../../util/firebaseApp";
 
 const UploadPage = (props) => {
-  // useEffect will call and get a list of mom's work
-
   React.useEffect(() => {
     const tempUser = `Nick Wang's artwork`;
     firestore
       .collection("artwork")
       .doc(tempUser)
-      .get()
-      .then((querySnapshot) => {
-        if (querySnapshot.exists) {
-          querySnapshot.forEach((doc) => {
-            console.log(`${doc.id} => ${doc.data()}`);
-          });
-        }
+      .onSnapshot(function (doc) {
+        console.log("Current data from useEffect: ", doc.data());
       });
   }, []);
 
   const callbackToReRenderArtworkPage = (user) => {
-    firestore
-      .collection("artwork")
-      .doc(user)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          console.log(`${doc.id} => ${doc.data()}`);
-        });
-      });
+    console.log(user);
+    // firestore
+    //   .collection("artwork")
+    //   .doc(user)
+    //   .get()
+    //   .then((querySnapshot) => {
+    //     querySnapshot.forEach((doc) => {
+    //       console.log(`${doc.id} => ${doc.data()}`);
+    //     });
+    //   });
   };
 
   return (
