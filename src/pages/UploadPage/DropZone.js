@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import firebase, { firestore } from "../../util/firebaseApp";
-// import { validate } from "./validate-image";
+import { validate } from "./validate-image";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -18,39 +18,50 @@ const StyledDiv = styled.div`
   margin: 10px 0;
 `;
 
-export default function MyDropzone() {
+export default function MyDropzone({ callbackToReRenderArtworkPage }) {
   const storageRef = firebase.storage().ref();
 
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
-      // const userId = 'NickWang'
-      // const filenameRef = storageRef.child(file.name)
+      if (!file.path.match(/.(jpg|jpeg|png|gif)$/i))
+        console.log("not an image");
+
+      const userId = `Nick Wang's artwork`;
+
       //   // Upload the image to Cloud Storage.
-      //   let filePath = userId + "/" + file.name;
-      //   const fileSnapshot = await firebase
-      //     .storage()
-      //     .ref(filePath)
-      //     .put(file);
-      //   const url = await fileSnapshot.ref.getDownloadURL();
-      //   console.log(validate(file));
+      let filePath = userId + file.name;
+      firebase
+        .storage()
+        .ref(filePath)
+        .put(file)
+        .then(() => {
+          storageRef
+            .child(filePath)
+            .getDownloadURL()
+            .then(function (url) {
+              console.log(url);
 
-
-
-    // // uploads the download url from storage 
-    //   firestore
-    //     .collection("users")
-    //     .add({
-    //       first: "Ada",
-    //       last: "Lovelace",
-    //       born: 1815,
-    //     })
-    //     .then(function (docRef) {
-    //       console.log("Document written with ID: ", docRef.id);
-    //     })
-    //     .catch(function (error) {
-    //       console.error("Error adding document: ", error);
-    //     });
-    // });
+              // // then uploads the download url from
+              firestore
+                .collection("artwork")
+                .doc(userId)
+                .add({
+                  title: file.name,
+                  imageUrl: url,
+                  timeStamp: Date.now(),
+                })
+                .then(function (docRef) {
+                  console.log("Document written with ID: ", docRef.id);
+                  callbackToReRenderArtworkPage(userId);
+                })
+                .catch(function (error) {
+                  console.error("Error adding document: ", error);
+                });
+            })
+            .catch((err) => console.error("error uploading file path", err));
+        })
+        .catch((err) => console.error("error uploading file", err));
+    });
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
