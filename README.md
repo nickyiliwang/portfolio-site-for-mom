@@ -9,3 +9,9 @@ Has login and signUp
 2. Home page displays All users, and you can click inside to see all their work.
 
 3. this will ideally try to have an react-i18next, for localization
+
+## Pages Setup
+
+1. Homepage, like instagram home page for now showing all the user content
+2. Upload page, this is your management, upload pictures, change titles, add a descriptions, and delete, and edit your profile
+3. login logout
