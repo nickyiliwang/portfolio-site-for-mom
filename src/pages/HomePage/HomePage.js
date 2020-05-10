@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+// components
+import TransitionsModal from "../../components/IndividualArtModal/IndividualArtModal";
 
 const StyledImage = styled.div`
   width: 200px;
@@ -34,12 +36,14 @@ const StyledSingleArt = styled.div`
 `;
 
 const HomePage = () => {
+  
+
   const renderPlaceholderImages = () => {
     const images = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     return images.map((image) => {
       return (
         <StyledSingleArt key={image}>
-          <img src="http://placekitten.com/200/300" alt="place kitten" />
+          <TransitionsModal image={image} />
         </StyledSingleArt>
       );
     });

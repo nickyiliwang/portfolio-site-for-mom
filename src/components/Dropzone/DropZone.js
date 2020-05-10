@@ -24,7 +24,7 @@ export default function MyDropzone() {
 
     acceptedFiles.forEach((file) => {
       if (!file.path.match(/.(jpg|jpeg|png|gif)$/i))
-        console.log("not an image");
+        console.error("not an image");
 
       const userId = `Nick Wang's artwork`;
       const artworkDbRef = firestore.collection("artwork").doc(userId);

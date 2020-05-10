@@ -15,3 +15,5 @@ Has login and signUp
 1. Homepage, like instagram home page for now showing all the user content
 2. Upload page, this is your management, upload pictures, change titles, add a descriptions, and delete, and edit your profile
 3. login logout
+
+Could: Homepage showcases other user's art
