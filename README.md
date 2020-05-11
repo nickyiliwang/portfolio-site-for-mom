@@ -16,4 +16,6 @@ Has login and signUp
 2. Upload page, this is your management, upload pictures, change titles, add a descriptions, and delete, and edit your profile
 3. login logout
 
+4. Make instagram home page!
+
 Could: Homepage showcases other user's art
