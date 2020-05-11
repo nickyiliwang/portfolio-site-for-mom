@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TransitionsModal({ image }) {
+export default function IndividualArtModal({ image }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -44,7 +44,7 @@ export default function TransitionsModal({ image }) {
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-          timeout: 500,
+          timeout: 300,
         }}
       >
         <Fade in={open}>

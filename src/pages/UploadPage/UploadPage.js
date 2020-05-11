@@ -9,7 +9,7 @@ const StyledImageDiv = styled.div`
 `;
 
 const UploadPage = () => {
-  const [state, setstate] = React.useState({});
+  const [state, setState] = React.useState({});
 
   React.useEffect(() => {
     const tempUser = `Nick Wang's artwork`;
@@ -17,16 +17,14 @@ const UploadPage = () => {
       .collection("artwork")
       .doc(tempUser)
       .onSnapshot((doc) => {
-        setstate({ ...doc.data() });
+        setState({ ...doc.data() });
       });
   }, []);
 
   return (
     <section className="upload-page">
       <h2>Please Upload your work here</h2>
-
       <MyDropzone />
-
       <div>Here is a list of all your artwork!</div>
       <StyledImageDiv>
         {state.hasOwnProperty("items") && <DisplayArtwork artworks={state} />}

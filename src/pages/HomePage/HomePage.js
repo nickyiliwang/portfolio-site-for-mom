@@ -1,49 +1,24 @@
 import React from "react";
-import styled from "styled-components";
 // components
-import TransitionsModal from "../../components/IndividualArtModal/IndividualArtModal";
+import IndividualArtModal from "../../components/IndividualArtModal/IndividualArtModal";
+// styles
+import {
+  StyledArtworkDisplay,
+  StyledImage,
+  StyledSingleArt,
+  StyledUserInfo,
+  StyledUserProfile,
+} from "./HomePageStyles";
 
-const StyledImage = styled.div`
-  width: 200px;
-  height: 200px;
 
-  img {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-`;
-
-const StyledUserProfile = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const StyledUserInfo = styled.div`
-  margin-left: 20px;
-`;
-
-const StyledArtworkDisplay = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin: 20px;
-`;
-
-const StyledSingleArt = styled.div`
-  flex-basis: 33.3%;
-  padding: 10px;
-`;
 
 const HomePage = () => {
-  
-
   const renderPlaceholderImages = () => {
     const images = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     return images.map((image) => {
       return (
         <StyledSingleArt key={image}>
-          <TransitionsModal image={image} />
+          <IndividualArtModal image={image} />
         </StyledSingleArt>
       );
     });
