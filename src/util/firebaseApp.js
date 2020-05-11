@@ -3,7 +3,7 @@ import "firebase/firestore";
 import "firebase/auth";
 import "firebase/storage";
 
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBpXkOZr_H8JmaZtjUm8tsMau70BPbpoQQ",
   authDomain: "portfolio-site-e8245.firebaseapp.com",
