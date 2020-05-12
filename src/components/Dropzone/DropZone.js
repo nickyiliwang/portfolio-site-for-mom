@@ -23,8 +23,7 @@ export default function MyDropzone() {
     const storageRef = firebase.storage().ref();
 
     acceptedFiles.forEach((file) => {
-      if (!file.path.match(/.(jpg|jpeg|png|gif)$/i))
-        console.error("not an image");
+      if (!file.path.match(/.(jpg|jpeg|png|gif)$/i)) return;
 
       const userId = `Nick Wang's artwork`;
       const artworkDbRef = firestore.collection("artwork").doc(userId);
@@ -51,6 +50,8 @@ export default function MyDropzone() {
                       // pushing new items into the item array
                       items: firebase.firestore.FieldValue.arrayUnion({
                         title: file.name,
+                        originalFileTitle: file.name,
+                        description: '',
                         imageUrl: url,
                         timeStamp: Date.now(),
                         id: uuidv4(),
