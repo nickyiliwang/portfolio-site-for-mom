@@ -63,6 +63,9 @@ export default function MyDropzone() {
                       items: [
                         {
                           title: file.name,
+                          description: "",
+                          creationDate: Date.now(),
+                          originalFileTitle: file.name,
                           imageUrl: url,
                           timeStamp: Date.now(),
                           id: uuidv4(),

@@ -59,7 +59,8 @@ export default function DisplayArtwork({ artworks }) {
         return (
           <div key={item.id}>
             <h2>{`Title:${item.title}`}</h2>
-            <p>{`Upload Time: ${moment().fromNow(item.timestamp)}`}</p>
+            <p>{`Creation Date: ${moment(item.creationDate).fromNow()}`}</p>
+            <p>{`Description: ${item.description}`}</p>
             <img src={item.imageUrl} alt={item.title} />
             <StyledButtonContainer>
               <Button

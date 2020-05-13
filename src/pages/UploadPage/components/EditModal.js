@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Modal, Backdrop, Fade, Button } from "@material-ui/core";
+import firebase, { firestore } from "../../../util/firebaseApp";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -22,11 +24,8 @@ export default function IndividualArtModal({ artDetails }) {
   const [newArtDetails, setNewArtDetails] = useState({});
 
   useEffect(() => {
-    effect;
-    return () => {
-      cleanup;
-    };
-  }, [input]);
+    setNewArtDetails(artDetails);
+  }, [artDetails]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -37,10 +36,29 @@ export default function IndividualArtModal({ artDetails }) {
   };
 
   const handleSubmit = () => {
-    console.log("submit", artDetails);
+    console.log("submit", newArtDetails);
+    const userId = `Nick Wang's artwork`;
+    const artworkDbRef = firestore.collection("artwork").doc(userId);
+
+    artworkDbRef
+      .update({
+        items: firebase.firestore.FieldValue.arrayRemove(artDetails),
+      })
+      .then(
+        artworkDbRef
+          .update({
+            items: firebase.firestore.FieldValue.arrayUnion(newArtDetails),
+          })
+          .catch((err) => console.error(err))
+      )
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
   };
 
-  const handleOnChange = () => {};
+  const handleOnChange = (e) => {
+    setNewArtDetails({ ...newArtDetails, [e.target.name]: e.target.value });
+  };
 
   return (
     <div>
@@ -78,8 +96,10 @@ export default function IndividualArtModal({ artDetails }) {
             <p>Edit Creation Date</p>
             <input
               name="creationDate"
-              type="text"
-              defaultValue={artDetails.creationDate}
+              type="Date"
+              defaultValue={moment(artDetails.creationDate).format(
+                "YYYY-MM-DD"
+              )}
               onChange={handleOnChange}
             />
 
