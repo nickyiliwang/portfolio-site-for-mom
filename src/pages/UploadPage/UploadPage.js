@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import MyDropzone from "../../components/Dropzone/DropZone";
 import { firestore } from "../../util/firebaseApp";
 import styled from "styled-components";
-import DisplayArtwork from "../../components/DisplayArtwork/DisplayArtwork";
+import DisplayArtwork from "./components/DisplayArtwork";
 
 const StyledImageDiv = styled.div`
   width: 400px;
 `;
 
 const UploadPage = () => {
-  const [state, setState] = React.useState({});
+  const [state, setState] = useState({});
 
   React.useEffect(() => {
     const tempUser = `Nick Wang's artwork`;

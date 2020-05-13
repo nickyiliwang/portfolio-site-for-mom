@@ -1,6 +1,13 @@
 import React from "react";
-import firebase, { firestore } from "../../util/firebaseApp";
+import firebase, { firestore } from "../../../util/firebaseApp";
 import moment from "moment";
+import EditModal from "./EditModal";
+import styled from "styled-components";
+import { Button } from "@material-ui/core";
+
+const StyledButtonContainer = styled.div`
+  display: flex;
+`;
 
 export default function DisplayArtwork({ artworks }) {
   const tempUser = `Nick Wang's artwork`;
@@ -46,10 +53,6 @@ export default function DisplayArtwork({ artworks }) {
       });
   };
 
-  const handleEditOnClick = (art) => {
-    // this needs to open up a modal and let the user change it's infos
-  };
-
   return (
     <div>
       {artworks.items.map((item) => {
@@ -58,8 +61,16 @@ export default function DisplayArtwork({ artworks }) {
             <h2>{`Title:${item.title}`}</h2>
             <p>{`Upload Time: ${moment().fromNow(item.timestamp)}`}</p>
             <img src={item.imageUrl} alt={item.title} />
-            <button onClick={() => handleDeleteOnClick(item)}>Delete</button>
-            <button onClick={() => handleEditOnClick(item)}>Edit</button>
+            <StyledButtonContainer>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => handleDeleteOnClick(item)}
+              >
+                Delete
+              </Button>
+              <EditModal artDetails={item} />
+            </StyledButtonContainer>
           </div>
         );
       })}

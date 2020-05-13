@@ -50,8 +50,9 @@ export default function MyDropzone() {
                       // pushing new items into the item array
                       items: firebase.firestore.FieldValue.arrayUnion({
                         title: file.name,
+                        description: "",
+                        creationDate: Date.now(),
                         originalFileTitle: file.name,
-                        description: '',
                         imageUrl: url,
                         timeStamp: Date.now(),
                         id: uuidv4(),
