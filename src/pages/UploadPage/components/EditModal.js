@@ -36,7 +36,6 @@ export default function IndividualArtModal({ artDetails }) {
   };
 
   const handleSubmit = () => {
-    console.log("submit", newArtDetails);
     const userId = `Nick Wang's artwork`;
     const artworkDbRef = firestore.collection("artwork").doc(userId);
 
@@ -54,6 +53,8 @@ export default function IndividualArtModal({ artDetails }) {
       .catch(function (error) {
         console.error("Error adding document: ", error);
       });
+
+    setOpen(false);
   };
 
   const handleOnChange = (e) => {
@@ -79,31 +80,40 @@ export default function IndividualArtModal({ artDetails }) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <p>Edit Title</p>
-            <input
-              name="title"
-              type="text"
-              defaultValue={artDetails.title}
-              onChange={handleOnChange}
-            />
-            <p>Edit Description</p>
-            <input
-              name="description"
-              type="text"
-              defaultValue={artDetails.description}
-              onChange={handleOnChange}
-            />
-            <p>Edit Creation Date</p>
-            <input
-              name="creationDate"
-              type="Date"
-              defaultValue={moment(artDetails.creationDate).format(
-                "YYYY-MM-DD"
-              )}
-              onChange={handleOnChange}
-            />
+            <form
+              action="#"
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <p>Edit Title</p>
+              <input
+                name="title"
+                type="text"
+                defaultValue={artDetails.title}
+                onChange={handleOnChange}
+              />
+              <p>Edit Description</p>
+              <input
+                name="description"
+                type="text"
+                defaultValue={artDetails.description}
+                onChange={handleOnChange}
+              />
+              <p>Edit Creation Date</p>
+              <input
+                name="creationDate"
+                type="Date"
+                defaultValue={moment(artDetails.creationDate).format(
+                  "YYYY-MM-DD"
+                )}
+                onChange={handleOnChange}
+              />
 
-            <button onClick={handleSubmit}>Submit</button>
+              <button type="submit" onClick={handleSubmit}>
+                Submit
+              </button>
+            </form>
           </div>
         </Fade>
       </Modal>

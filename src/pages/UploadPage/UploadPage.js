@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MyDropzone from "../../components/Dropzone/DropZone";
 import { firestore } from "../../util/firebaseApp";
 import styled from "styled-components";
@@ -11,13 +11,14 @@ const StyledImageDiv = styled.div`
 const UploadPage = () => {
   const [state, setState] = useState({});
 
-  React.useEffect(() => {
+  useEffect(() => {
     const tempUser = `Nick Wang's artwork`;
     firestore
       .collection("artwork")
       .doc(tempUser)
       .onSnapshot((doc) => {
-        setState({ ...doc.data() });
+        const newData = doc.data();
+        setState({ ...newData });
       });
   }, []);
 

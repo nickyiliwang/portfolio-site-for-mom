@@ -55,11 +55,12 @@ export default function DisplayArtwork({ artworks }) {
 
   return (
     <div>
+      {/* ideally would be nice to sort by upload date or have user select a sorting method. */}
       {artworks.items.map((item) => {
         return (
           <div key={item.id}>
             <h2>{`Title:${item.title}`}</h2>
-            <p>{`Creation Date: ${moment(item.creationDate).fromNow()}`}</p>
+            <p>{`Creation Date: ${item.creationDate}`}</p>
             <p>{`Description: ${item.description}`}</p>
             <img src={item.imageUrl} alt={item.title} />
             <StyledButtonContainer>
