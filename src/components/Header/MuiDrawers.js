@@ -15,6 +15,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import HomeIcon from "@material-ui/icons/Home";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
+import WarningIcon from "@material-ui/icons/Warning";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import IconButton from "@material-ui/core/IconButton";
@@ -44,12 +45,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function MuiDrawer() {
+function MuiDrawer({ isSignedIn, signOut }) {
   const classes = useStyles();
-  // react hooks
   const [state, setState] = useState({
     left: false,
   });
+
+  console.log(isSignedIn);
 
   const toggleDrawer = (side, open) => (event) => {
     if (
@@ -125,14 +127,20 @@ function MuiDrawer() {
             <CloudUploadIcon />
           </Button>
         </Tooltip>
-        {/* Login */}
-        <Tooltip title="Login">
-          <Button component={NavLink} to="/login">
-            <LockOpenIcon />
-          </Button>
-        </Tooltip>
+        {isSignedIn ? (
+          <Tooltip title="Logout">
+            <Button onClick={signOut} component={NavLink} to="/login">
+              <WarningIcon />
+            </Button>
+          </Tooltip>
+        ) : (
+          <Tooltip title="Login">
+            <Button component={NavLink} to="/login">
+              <LockOpenIcon />
+            </Button>
+          </Tooltip>
+        )}
       </div>
-
       <Drawer
         anchor="left"
         open={state.left}

@@ -21,3 +21,5 @@ Has login and signUp
 5. to avoid duplicated usernames when creating artworks collection docs, maybe just use uid because it's unique to each users.
 
 Could: Homepage showcases other user's art
+
+Could: Should have a way to share your work, using your uid as route.

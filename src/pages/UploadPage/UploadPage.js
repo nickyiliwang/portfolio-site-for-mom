@@ -8,6 +8,8 @@ const StyledImageDiv = styled.div`
   width: 400px;
 `;
 
+const StyledSection = styled.section``;
+
 const UploadPage = () => {
   const [state, setState] = useState({});
 
@@ -23,14 +25,14 @@ const UploadPage = () => {
   }, []);
 
   return (
-    <section className="upload-page">
+    <StyledSection>
       <h2>Please Upload your work here</h2>
       <MyDropzone />
       <div>Here is a list of all your artwork!</div>
       <StyledImageDiv>
         {state.hasOwnProperty("items") && <DisplayArtwork artworks={state} />}
       </StyledImageDiv>
-    </section>
+    </StyledSection>
   );
 };
 

@@ -1,6 +1,5 @@
 import React from "react";
 import firebase, { firestore } from "../../../util/firebaseApp";
-import moment from "moment";
 import EditModal from "./EditModal";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
