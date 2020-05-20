@@ -1,8 +1,15 @@
-import styled from 'styled-components'
+import styled from "styled-components";
+
+export const StyledHomePage = styled.section`
+  padding-top: 80px;
+`;
 
 export const StyledImage = styled.div`
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   img {
     width: 200px;
@@ -19,6 +26,7 @@ export const StyledUserProfile = styled.div`
 
 export const StyledUserInfo = styled.div`
   margin-left: 20px;
+  font-family: "Open Sans", sans-serif;
 `;
 
 export const StyledArtworkDisplay = styled.div`

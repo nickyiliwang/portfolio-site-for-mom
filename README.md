@@ -18,7 +18,9 @@ Has login and signUp
 
 4. Make instagram home page!
 
-5. to avoid duplicated usernames when creating artworks collection docs, maybe just use uid because it's unique to each users.
+5) to avoid duplicated usernames when creating artworks collection docs, maybe just use uid because it's unique to each users.
+
+6) navbar background color change to insta white
 
 Could: Homepage showcases other user's art
 

@@ -9,6 +9,7 @@ import UploadPage from "./pages/UploadPage/UploadPage";
 // Component
 import Header from "./components/Header/Header";
 import { ProvideAuth } from "./util/onAuthStateChanged";
+import PrivateRoute from "./util/PrivateRoute";
 
 const App = () => {
   return (
@@ -17,12 +18,12 @@ const App = () => {
         <Router>
           <Header />
           <Switch>
-            <Route exact path="/">
+            <PrivateRoute exact path="/">
               <HomePage />
-            </Route>
-            <Route exact path="/upload">
+            </PrivateRoute>
+            <PrivateRoute exact path="/upload">
               <UploadPage />
-            </Route>
+            </PrivateRoute>
             <Route exact path="/login">
               <LoginPage />
             </Route>

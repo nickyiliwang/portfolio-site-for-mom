@@ -6,6 +6,8 @@ import { NavLink } from "react-router-dom";
 // mui
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -29,9 +31,6 @@ const useStyles = makeStyles((theme) => ({
     width: "250px",
     overflow: "hidden",
   },
-  fullList: {
-    width: "auto",
-  },
   // these buttons will be aligned to right side of abbBar
   toolbarButtonsRight: {
     [theme.breakpoints.down("335")]: {
@@ -44,6 +43,11 @@ const useStyles = makeStyles((theme) => ({
   listItemText: {
     color: "#247ba0",
     width: "200px",
+  },
+  appBar: {
+    background: "#ffffff",
+    boxShadow: "none",
+    borderBottom: "1px solid rgba(var(--b6a,219,219,219),1)",
   },
 }));
 
@@ -109,43 +113,45 @@ function MuiDrawer() {
 
   return (
     <div>
-      <div>
-        {/* nav */}
-        <Tooltip title="Navigation">
-          <Button onClick={toggleDrawer("left", true)}>
-            <MenuIcon />
-          </Button>
-        </Tooltip>
-        {/* home */}
-        <Tooltip title="Home">
-          <Button component={NavLink} to="/">
-            <HomeIcon />
-          </Button>
-        </Tooltip>
-        {/* Upload */}
-        <Tooltip title="Upload">
-          <Button component={NavLink} to="/upload">
-            <CloudUploadIcon />
-          </Button>
-        </Tooltip>
-        {auth.user ? (
-          <Tooltip title="Logout">
-            <Button
-              onClick={() => auth.signout()}
-              component={NavLink}
-              to="/login"
-            >
-              <WarningIcon />
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          {/* nav */}
+          <Tooltip title="Navigation">
+            <Button onClick={toggleDrawer("left", true)}>
+              <MenuIcon />
             </Button>
           </Tooltip>
-        ) : (
-          <Tooltip title="Login">
-            <Button component={NavLink} to="/login">
-              <LockOpenIcon />
+          {/* home */}
+          <Tooltip title="Home">
+            <Button component={NavLink} to="/">
+              <HomeIcon />
             </Button>
           </Tooltip>
-        )}
-      </div>
+          {/* Upload */}
+          <Tooltip title="Upload">
+            <Button component={NavLink} to="/upload">
+              <CloudUploadIcon />
+            </Button>
+          </Tooltip>
+          {auth.user ? (
+            <Tooltip title="Logout">
+              <Button
+                onClick={() => auth.signout()}
+                component={NavLink}
+                to="/login"
+              >
+                <WarningIcon />
+              </Button>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Login">
+              <Button component={NavLink} to="/login">
+                <LockOpenIcon />
+              </Button>
+            </Tooltip>
+          )}
+        </Toolbar>
+      </AppBar>
       <Drawer
         anchor="left"
         open={state.left}

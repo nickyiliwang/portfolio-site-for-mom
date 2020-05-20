@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 import firebase, { firestore } from "../util/firebaseApp";
+import { v4 as uuidv4 } from "uuid";
 
 // react context api
 const authContext = createContext();
@@ -18,9 +19,9 @@ export const useAuth = () => {
 };
 
 // Provider hook that creates auth object and handles state
+
 function useProvideAuth() {
   const [user, setUser] = useState(null);
-
   const signout = () => {
     return firebase
       .auth()
@@ -47,6 +48,7 @@ function useProvideAuth() {
               photoURL: photoURL,
               description: "",
               creationDate: Date.now(),
+              idHandle: uuidv4(),
             });
           }
         });
