@@ -20,8 +20,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
+// auth
+import { useAuth } from "../../util/onAuthStateChanged";
 
-// mui
+// mui style
 const useStyles = makeStyles((theme) => ({
   list: {
     width: "250px",
@@ -45,13 +47,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function MuiDrawer({ isSignedIn, signOut }) {
+function MuiDrawer() {
+  const auth = useAuth();
   const classes = useStyles();
   const [state, setState] = useState({
     left: false,
   });
-
-  console.log(isSignedIn);
 
   const toggleDrawer = (side, open) => (event) => {
     if (
@@ -127,9 +128,13 @@ function MuiDrawer({ isSignedIn, signOut }) {
             <CloudUploadIcon />
           </Button>
         </Tooltip>
-        {isSignedIn ? (
+        {auth.user ? (
           <Tooltip title="Logout">
-            <Button onClick={signOut} component={NavLink} to="/login">
+            <Button
+              onClick={() => auth.signout()}
+              component={NavLink}
+              to="/login"
+            >
               <WarningIcon />
             </Button>
           </Tooltip>

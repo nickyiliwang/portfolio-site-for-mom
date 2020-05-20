@@ -1,9 +1,8 @@
 import React from "react";
 import MuiDrawers from "./MuiDrawers";
-import { withAuthSubscription } from "../../util/onAuthStateChanged";
 
-const Header = (props) => {
-  return <MuiDrawers {...props} />;
+const Header = () => {
+  return <MuiDrawers />;
 };
 
-export default withAuthSubscription(Header);
+export default Header;
