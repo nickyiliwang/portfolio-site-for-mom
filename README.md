@@ -20,7 +20,7 @@ Has login and signUp
 
 5) to avoid duplicated usernames when creating artworks collection docs, maybe just use uid because it's unique to each users.
 
-6) navbar background color change to insta white
+6) learn instragram layout divs/containers
 
 Could: Homepage showcases other user's art
 

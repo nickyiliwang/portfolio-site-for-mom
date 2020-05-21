@@ -15,11 +15,10 @@ const StyledDiv = styled.div`
   border: 2px dashed #f16624;
   border-radius: 5px;
   background: white;
-  margin: 10px 0;
   cursor: pointer;
 `;
 
-export default function MyDropzone() {
+export default function ProfilePictureDropZone({}) {
   const onDrop = useCallback((acceptedFiles) => {
     const storageRef = firebase.storage().ref();
 
@@ -29,7 +28,26 @@ export default function MyDropzone() {
       const userId = `Nick Wang's artwork`;
       const artworkDbRef = firestore.collection("artwork").doc(userId);
 
-      //   // Upload the image to Cloud Storage.
+    //   // Create an initial document to update.
+    //   var frankDocRef = db.collection("users").doc("frank");
+    //   frankDocRef.set({
+    //     name: "Frank",
+    //     favorites: { food: "Pizza", color: "Blue", subject: "recess" },
+    //     age: 12,
+    //   });
+
+    //   // To update age and favorite color:
+    //   db.collection("users")
+    //     .doc("frank")
+    //     .update({
+    //       age: 13,
+    //       "favorites.color": "Red",
+    //     })
+    //     .then(function () {
+    //       console.log("Document successfully updated!");
+    //     });
+
+      // Upload the image to Cloud Storage.
       let filePath = `${userId}/${file.path}`;
       firebase
         .storage()

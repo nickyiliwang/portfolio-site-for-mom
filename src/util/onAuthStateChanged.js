@@ -49,6 +49,7 @@ function useProvideAuth() {
               description: "",
               creationDate: Date.now(),
               idHandle: uuidv4(),
+              website: "",
             });
           }
         });

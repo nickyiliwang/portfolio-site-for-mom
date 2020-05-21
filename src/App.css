@@ -1,5 +1,7 @@
-html {
+html,
+body {
   background: #fafafa;
+  padding-top: 64px;
 }
 
 h2 {
@@ -17,6 +19,3 @@ img {
   width: 80%;
   margin: 0 auto;
 }
-
-
-

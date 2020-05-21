@@ -14,6 +14,8 @@ import {
 import { firestore } from "../../util/firebaseApp";
 // auth
 import { useAuth } from "../../util/onAuthStateChanged";
+// moment
+import moment from "moment";
 
 const HomePage = () => {
   const auth = useAuth();
@@ -45,24 +47,34 @@ const HomePage = () => {
 
   const renderUserInfo = () => {
     const {
-      userName,
-      description,
+      userName = "",
+      description = "",
       creationDate,
-      idHandle,
       photoURL,
+      website,
     } = userDataFromDB;
-    console.log(userDataFromDB);
     return (
       <StyledUserProfile>
         <StyledImage>
-          <img src={photoURL} alt="user profile" />
+          <img
+            src={photoURL ? photoURL : "http://placekitten.com/300/300"}
+            alt="user profile"
+          />
         </StyledImage>
         <StyledUserInfo>
           <h2>{`Name: ${userName}`}</h2>
+          <p>{`Joined: ${moment(creationDate).fromNow()}`}</p>
           <p>{`Description: ${
             description === "" ? "Tell the world about yourself!" : description
           }`}</p>
-          <p>Website: www.nickyiliwang.com</p>
+          <a
+            href="http://www.google.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Website:</span>{" "}
+            {website === "" ? "Placeholder Google" : website}
+          </a>
         </StyledUserInfo>
       </StyledUserProfile>
     );
