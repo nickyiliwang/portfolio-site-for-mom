@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Modal, Backdrop, Fade, Button } from "@material-ui/core";
 import firebase, { firestore } from "../../../util/firebaseApp";
 import moment from "moment";
+import { useAuth } from "../../../util/onAuthStateChanged";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -18,14 +19,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function IndividualArtModal({ artDetails }) {
+export default function IndividualArtModal({
+  title,
+  description,
+  creationDate,
+  ...props
+}) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [newArtDetails, setNewArtDetails] = useState({});
-
+  const [userId, setUserId] = useState(null);
+  const auth = useAuth();
   useEffect(() => {
-    setNewArtDetails(artDetails);
-  }, [artDetails]);
+    if (auth.user) {
+      setUserId(auth.user.uid);
+    }
+    
+  }, [auth]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -36,87 +45,87 @@ export default function IndividualArtModal({ artDetails }) {
   };
 
   const handleSubmit = () => {
-    const userId = `Nick Wang's artwork`;
     const artworkDbRef = firestore.collection("artwork").doc(userId);
+    // artworkDbRef
+    //   .update({
+    //     items: firebase.firestore.FieldValue.arrayRemove(artDetails),
+    //   })
+    //   .then(
+    //     artworkDbRef
+    //       .update({
+    //         items: firebase.firestore.FieldValue.arrayUnion(newArtDetails),
+    //       })
+    //       .catch((err) => console.error(err))
+    //   )
+    //   .catch(function (error) {
+    //     console.error("Error adding document: ", error);
+    //   });
 
-    artworkDbRef
-      .update({
-        items: firebase.firestore.FieldValue.arrayRemove(artDetails),
-      })
-      .then(
-        artworkDbRef
-          .update({
-            items: firebase.firestore.FieldValue.arrayUnion(newArtDetails),
-          })
-          .catch((err) => console.error(err))
-      )
-      .catch(function (error) {
-        console.error("Error adding document: ", error);
-      });
-
-    setOpen(false);
+    // setOpen(false);
   };
 
   const handleOnChange = (e) => {
-    setNewArtDetails({ ...newArtDetails, [e.target.name]: e.target.value });
+    // setNewArtDetails({ ...newArtDetails, [e.target.name]: e.target.value });
   };
 
-  return (
-    <div>
-      <Button variant="contained" color="primary" onClick={handleOpen}>
-        Edit
-      </Button>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 300,
-        }}
-      >
-        <Fade in={open}>
-          <div className={classes.paper}>
-            <form
-              action="#"
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-            >
-              <p>Edit Title</p>
-              <input
-                name="title"
-                type="text"
-                defaultValue={artDetails.title}
-                onChange={handleOnChange}
-              />
-              <p>Edit Description</p>
-              <input
-                name="description"
-                type="text"
-                defaultValue={artDetails.description}
-                onChange={handleOnChange}
-              />
-              <p>Edit Creation Date</p>
-              <input
-                name="creationDate"
-                type="Date"
-                defaultValue={moment(artDetails.creationDate).format(
-                  "YYYY-MM-DD"
-                )}
-                onChange={handleOnChange}
-              />
+  const renderButtonAndModal = () => {
+    return (
+      <>
+        <Button variant="contained" color="primary" onClick={handleOpen}>
+          Edit
+        </Button>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 300,
+          }}
+        >
+          <Fade in={open}>
+            <div className={classes.paper}>
+              <form
+                action="#"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+              >
+                <p>Edit Title</p>
+                <input
+                  name="title"
+                  type="text"
+                  defaultValue={title}
+                  onChange={handleOnChange}
+                />
+                <p>Edit Description</p>
+                <input
+                  name="description"
+                  type="text"
+                  defaultValue={description}
+                  onChange={handleOnChange}
+                />
+                <p>Edit Creation Date</p>
+                <input
+                  name="creationDate"
+                  type="Date"
+                  defaultValue={moment(creationDate).format("YYYY-MM-DD")}
+                  onChange={handleOnChange}
+                />
 
-              <button type="submit" onClick={handleSubmit}>
-                Submit
-              </button>
-            </form>
-          </div>
-        </Fade>
-      </Modal>
-    </div>
-  );
+                <button type="submit" onClick={handleSubmit}>
+                  Submit
+                </button>
+              </form>
+            </div>
+          </Fade>
+        </Modal>
+      </>
+    );
+  };
+
+  return <div>{userId && renderButtonAndModal()}</div>;
 }

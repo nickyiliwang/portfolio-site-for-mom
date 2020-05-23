@@ -20,6 +20,7 @@ import moment from "moment";
 const HomePage = () => {
   const auth = useAuth();
   const [userDataFromDB, setUserDataFromDB] = useState({});
+  const [userArtWorkFromDB, setUserArtWorkFromDB] = useState(null);
 
   useEffect(() => {
     if (auth.user) {
@@ -31,19 +32,15 @@ const HomePage = () => {
           setUserDataFromDB(res.data());
         }
       });
+
+      const artworkDbRef = firestore.collection("artwork").doc(auth.user.uid);
+      artworkDbRef.get().then((res) => {
+        if (res.data()) {
+          setUserArtWorkFromDB(res.data().items);
+        }
+      });
     }
   }, [auth]);
-
-  const renderPlaceholderImages = () => {
-    const images = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    return images.map((image) => {
-      return (
-        <StyledSingleArt key={image}>
-          <IndividualArtModal image={image} />
-        </StyledSingleArt>
-      );
-    });
-  };
 
   const renderUserInfo = () => {
     const {
@@ -56,6 +53,7 @@ const HomePage = () => {
     return (
       <StyledUserProfile>
         <StyledImage>
+          {/* this is modal should me */}
           <img
             src={photoURL ? photoURL : "http://placekitten.com/300/300"}
             alt="user profile"
@@ -80,11 +78,23 @@ const HomePage = () => {
     );
   };
 
+  const renderImages = () => {
+    if (userArtWorkFromDB) {
+      return userArtWorkFromDB.map(({ id, ...props }) => {
+        return (
+          <StyledSingleArt key={id}>
+            <IndividualArtModal {...props} />
+          </StyledSingleArt>
+        );
+      });
+    }
+  };
+
   return (
     <StyledHomePage>
       {renderUserInfo()}
       <hr />
-      <StyledArtworkDisplay>{renderPlaceholderImages()}</StyledArtworkDisplay>
+      <StyledArtworkDisplay>{renderImages()}</StyledArtworkDisplay>
     </StyledHomePage>
   );
 };

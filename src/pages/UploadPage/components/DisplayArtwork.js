@@ -1,5 +1,7 @@
 import React from "react";
 import firebase, { firestore } from "../../../util/firebaseApp";
+import SingleArtworkCard from "./SingleArtworkCard";
+
 import EditModal from "./EditModal";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
@@ -8,14 +10,13 @@ const StyledButtonContainer = styled.div`
   display: flex;
 `;
 
-export default function DisplayArtwork({ artworks }) {
-  const tempUser = `Nick Wang's artwork`;
+export default function DisplayArtwork({ userId, artworks }) {
   const handleDeleteOnClick = (art) => {
     // Create a reference to the file to delete
     const desertRef = firebase
       .storage()
       .ref()
-      .child(`${tempUser}/${art.originalFileTitle}`);
+      .child(`${userId}/${art.originalFileTitle}`);
 
     // Delete the file
     desertRef
@@ -24,7 +25,7 @@ export default function DisplayArtwork({ artworks }) {
         // File deleted successfully
         console.log("file deleted");
         // delete firestore link and info
-        const docRef = firestore.collection("artwork").doc(tempUser);
+        const docRef = firestore.collection("artwork").doc(userId);
         docRef
           .get()
           .then(function (doc) {
@@ -39,11 +40,11 @@ export default function DisplayArtwork({ artworks }) {
               docRef.update({ items: updatedArtItems });
             } else {
               // doc.data() will be undefined in this case
-              console.log("No such document!");
+              console.error("No such document!");
             }
           })
           .catch(function (error) {
-            console.log("Error getting document:", error);
+            console.error("Error getting document:", error);
           });
       })
       .catch(function (error) {
@@ -55,13 +56,13 @@ export default function DisplayArtwork({ artworks }) {
   return (
     <div>
       {/* ideally would be nice to sort by upload date or have user select a sorting method. */}
-      {artworks.items.map((item) => {
+      {artworks.items.map(({ id, ...props }) => {
         return (
-          <div key={item.id}>
-            <h2>{`Title:${item.title}`}</h2>
-            <p>{`Creation Date: ${item.creationDate}`}</p>
-            <p>{`Description: ${item.description}`}</p>
-            <img src={item.imageUrl} alt={item.title} />
+          <div key={id}>
+            {/* <h2>{`Title:${title}`}</h2>
+            <p>{`Creation Date: ${creationDate}`}</p>
+            <p>{`Description: ${description}`}</p>
+            <img src={imageUrl} alt={title} />
             <StyledButtonContainer>
               <Button
                 variant="contained"
@@ -70,8 +71,8 @@ export default function DisplayArtwork({ artworks }) {
               >
                 Delete
               </Button>
-              <EditModal artDetails={item} />
-            </StyledButtonContainer>
+            </StyledButtonContainer> */}
+            <SingleArtworkCard {...props} />
           </div>
         );
       })}

@@ -19,50 +19,36 @@ const StyledDiv = styled.div`
   cursor: pointer;
 `;
 
-export default function MyDropzone() {
-  const onDrop = useCallback((acceptedFiles) => {
-    const storageRef = firebase.storage().ref();
+export default function MyDropzone({ userId }) {
+  // const userId = "Nick Wang's artwork";
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      const storageRef = firebase.storage().ref();
+      acceptedFiles.forEach((file) => {
+        if (!file.path.match(/.(jpg|jpeg|png|gif)$/i)) return;
+        const artworkDbRef = firestore.collection("artwork").doc(userId);
 
-    acceptedFiles.forEach((file) => {
-      if (!file.path.match(/.(jpg|jpeg|png|gif)$/i)) return;
-
-      const userId = `Nick Wang's artwork`;
-      const artworkDbRef = firestore.collection("artwork").doc(userId);
-
-      //   // Upload the image to Cloud Storage.
-      let filePath = `${userId}/${file.path}`;
-      firebase
-        .storage()
-        .ref(filePath)
-        .put(file)
-        .then(() => {
-          storageRef
-            .child(filePath)
-            .getDownloadURL()
-            .then(function (url) {
-              // then uploads the download url from
-              firestore
-                .collection("artwork")
-                .doc(userId)
-                .get()
-                .then((doc) => {
-                  if (doc.exists) {
-                    artworkDbRef.update({
-                      // pushing new items into the item array
-                      items: firebase.firestore.FieldValue.arrayUnion({
-                        title: file.name,
-                        description: "",
-                        creationDate: Date.now(),
-                        originalFileTitle: file.name,
-                        imageUrl: url,
-                        timeStamp: Date.now(),
-                        id: uuidv4(),
-                      }),
-                    });
-                  } else {
-                    artworkDbRef.set({
-                      items: [
-                        {
+        //   // Upload the image to Cloud Storage.
+        let filePath = `${userId}/${file.path}`;
+        firebase
+          .storage()
+          .ref(filePath)
+          .put(file)
+          .then(() => {
+            storageRef
+              .child(filePath)
+              .getDownloadURL()
+              .then(function (url) {
+                // then uploads the download url from
+                firestore
+                  .collection("artwork")
+                  .doc(userId)
+                  .get()
+                  .then((doc) => {
+                    if (doc.exists) {
+                      artworkDbRef.update({
+                        // pushing new items into the item array
+                        items: firebase.firestore.FieldValue.arrayUnion({
                           title: file.name,
                           description: "",
                           creationDate: Date.now(),
@@ -70,21 +56,39 @@ export default function MyDropzone() {
                           imageUrl: url,
                           timeStamp: Date.now(),
                           id: uuidv4(),
-                        },
-                      ],
-                    });
-                  }
-                })
-                .catch(function (error) {
-                  console.error("Error adding document: ", error);
-                });
-            })
-            .catch((err) => console.error("error uploading file path", err));
-        })
-        .catch((err) => console.error("error uploading file", err));
-    });
-  }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+                        }),
+                      });
+                    } else {
+                      artworkDbRef.set({
+                        items: [
+                          {
+                            title: file.name,
+                            description: "",
+                            creationDate: Date.now(),
+                            originalFileTitle: file.name,
+                            imageUrl: url,
+                            timeStamp: Date.now(),
+                            id: uuidv4(),
+                          },
+                        ],
+                      });
+                    }
+                  })
+                  .catch(function (error) {
+                    console.error("Error adding document: ", error);
+                  });
+              })
+              .catch((err) => console.error("error uploading file path", err));
+          })
+          .catch((err) => console.error("error uploading file", err));
+      });
+    },
+    [userId]
+  );
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+  });
 
   return (
     <StyledDiv {...getRootProps()}>

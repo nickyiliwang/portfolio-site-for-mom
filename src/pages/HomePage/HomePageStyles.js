@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import { wrapper } from "../../components/GlobalStyles/GlobalStyles";
 
 export const StyledHomePage = styled.section`
+  ${wrapper}
   padding-top: 80px;
 `;
 
@@ -32,10 +34,8 @@ export const StyledUserInfo = styled.div`
 export const StyledArtworkDisplay = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 20px;
 `;
 
 export const StyledSingleArt = styled.div`
-  flex-basis: 33.3%;
-  padding: 10px;
+  flex-basis: 33.33%;
 `;

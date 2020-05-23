@@ -13,24 +13,22 @@ import PrivateRoute from "./util/PrivateRoute";
 
 const App = () => {
   return (
-    <div className="wrapper">
-      <ProvideAuth>
-        <Router>
-          <Header />
-          <Switch>
-            <PrivateRoute exact path="/">
-              <HomePage />
-            </PrivateRoute>
-            <PrivateRoute exact path="/upload">
-              <UploadPage />
-            </PrivateRoute>
-            <Route exact path="/login">
-              <LoginPage />
-            </Route>
-          </Switch>
-        </Router>
-      </ProvideAuth>
-    </div>
+    <ProvideAuth>
+      <Router>
+        <Header />
+        <Switch>
+          <PrivateRoute exact path="/">
+            <HomePage />
+          </PrivateRoute>
+          <PrivateRoute exact path="/upload">
+            <UploadPage />
+          </PrivateRoute>
+          <Route exact path="/login">
+            <LoginPage />
+          </Route>
+        </Switch>
+      </Router>
+    </ProvideAuth>
   );
 };
 
