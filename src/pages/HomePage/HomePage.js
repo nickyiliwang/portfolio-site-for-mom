@@ -60,7 +60,7 @@ const HomePage = () => {
           />
         </StyledImage>
         <StyledUserInfo>
-          <h2>{`Name: ${userName}`}</h2>
+          <h2>{userName}</h2>
           <p>{`Joined: ${moment(creationDate).fromNow()}`}</p>
           <p>{`Description: ${
             description === "" ? "Tell the world about yourself!" : description

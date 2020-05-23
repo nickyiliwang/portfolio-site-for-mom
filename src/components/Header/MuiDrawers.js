@@ -24,6 +24,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 // auth
 import { useAuth } from "../../util/onAuthStateChanged";
+// icon
+import Logo from "../../assets/Momstagram Logo.png";
 
 // mui style
 const useStyles = makeStyles((theme) => ({
@@ -48,6 +50,13 @@ const useStyles = makeStyles((theme) => ({
     background: "#ffffff",
     boxShadow: "none",
     borderBottom: "1px solid rgba(var(--b6a,219,219,219),1)",
+  },
+  icon: {
+    background: `url('${Logo}')`,
+    backgroundSize: "200px 40px",
+    backgroundRepeat: "no-repeat",
+    width: "200px",
+    height: "40px",
   },
 }));
 
@@ -115,6 +124,13 @@ function MuiDrawer() {
     <div>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
+          {/* Logo */}
+          <Tooltip title="Navigation">
+            <Button
+              className={classes.icon}
+              onClick={toggleDrawer("left", true)}
+            ></Button>
+          </Tooltip>
           {/* nav */}
           <Tooltip title="Navigation">
             <Button onClick={toggleDrawer("left", true)}>

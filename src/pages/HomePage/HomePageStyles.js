@@ -10,7 +10,6 @@ export const StyledImage = styled.div`
   width: 300px;
   height: 300px;
   display: flex;
-  align-items: center;
   justify-content: center;
 
   img {
@@ -23,12 +22,21 @@ export const StyledImage = styled.div`
 
 export const StyledUserProfile = styled.div`
   display: flex;
-  align-items: center;
+  margin-top: 20px;
+  * {
+    margin-bottom: 10px;
+  }
+  /* align-items: center; */
 `;
 
 export const StyledUserInfo = styled.div`
   margin-left: 20px;
   font-family: "Open Sans", sans-serif;
+  padding-top: 20px;
+
+  h2 {
+    font-size: 28px;
+  }
 `;
 
 export const StyledArtworkDisplay = styled.div`
