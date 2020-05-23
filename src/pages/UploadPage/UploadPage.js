@@ -34,7 +34,7 @@ const UploadPage = () => {
         <StyledSection>
           <h2>Upload you artwork</h2>
           <MyDropzone userId={userId} />
-          <div>Here is a list of all your artwork!</div>
+          <p>Art work card</p>
           <StyledImageDiv>
             {state.hasOwnProperty("items") && (
               <DisplayArtwork userId={userId} artworks={state} />

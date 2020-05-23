@@ -11,11 +11,11 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { blue } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import EditModal from "./EditModal";
 import ImageIcon from "@material-ui/icons/Image";
+import DeleteImage from "./DeleteImage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,11 +73,7 @@ export default function SingleArtworkCard({ ...props }) {
       </CardContent>
       <CardActions disableSpacing>
         <EditModal {...props} />
-
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        
+        <DeleteImage {...props} />
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,

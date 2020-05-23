@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Modal, Backdrop, Fade, Button } from "@material-ui/core";
 import firebase, { firestore } from "../../../util/firebaseApp";
 import moment from "moment";
-import { useAuth } from "../../../util/onAuthStateChanged";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -19,22 +18,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function IndividualArtModal({
-  title,
-  description,
-  creationDate,
-  ...props
-}) {
+export default function IndividualArtModal({ userId, ...props }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [userId, setUserId] = useState(null);
-  const auth = useAuth();
+  const [newArtDetails, setNewArtDetails] = useState(null);
+  const { title, description, creationDate } = props;
+
+
+  // this is causing infinite loooooooooop
   useEffect(() => {
-    if (auth.user) {
-      setUserId(auth.user.uid);
+    function doSomething() {
+      setNewArtDetails(props);
     }
-    
-  }, [auth]);
+
+    // doSomething();
+  });
 
   const handleOpen = () => {
     setOpen(true);
@@ -46,26 +44,27 @@ export default function IndividualArtModal({
 
   const handleSubmit = () => {
     const artworkDbRef = firestore.collection("artwork").doc(userId);
-    // artworkDbRef
-    //   .update({
-    //     items: firebase.firestore.FieldValue.arrayRemove(artDetails),
-    //   })
-    //   .then(
-    //     artworkDbRef
-    //       .update({
-    //         items: firebase.firestore.FieldValue.arrayUnion(newArtDetails),
-    //       })
-    //       .catch((err) => console.error(err))
-    //   )
-    //   .catch(function (error) {
-    //     console.error("Error adding document: ", error);
-    //   });
+    const artWorkToRemove = { ...props };
+    artworkDbRef
+      .update({
+        items: firebase.firestore.FieldValue.arrayRemove(artWorkToRemove),
+      })
+      .then(
+        artworkDbRef
+          .update({
+            items: firebase.firestore.FieldValue.arrayUnion(newArtDetails),
+          })
+          .catch((err) => console.error(err))
+      )
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
 
-    // setOpen(false);
+    setOpen(false);
   };
 
   const handleOnChange = (e) => {
-    // setNewArtDetails({ ...newArtDetails, [e.target.name]: e.target.value });
+    setNewArtDetails({ ...newArtDetails, [e.target.name]: e.target.value });
   };
 
   const renderButtonAndModal = () => {
