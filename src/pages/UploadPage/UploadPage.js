@@ -3,10 +3,15 @@ import MyDropzone from "../../components/Dropzone/DropZone";
 import { firestore } from "../../util/firebaseApp";
 import DisplayArtwork from "./components/DisplayArtwork";
 import { useAuth } from "../../util/onAuthStateChanged";
-import { StyledImageDiv, StyledSection } from "./UploadPageStyles";
+import {
+  StyledImageDiv,
+  StyledSection,
+  StyledDropZoneDiv,
+} from "./UploadPageStyles";
+import EmptyArtwork from "../../util/EmptyArtwork";
 
 const UploadPage = () => {
-  const [state, setState] = useState({});
+  const [artworks, setArtworks] = useState({});
   const [userId, setUserId] = useState(null);
   const auth = useAuth();
 
@@ -23,7 +28,7 @@ const UploadPage = () => {
         .doc(userId)
         .onSnapshot((doc) => {
           const newData = doc.data();
-          setState({ ...newData });
+          setArtworks({ ...newData });
         });
     }
   }, [userId]);
@@ -32,14 +37,17 @@ const UploadPage = () => {
     <>
       {userId && (
         <StyledSection>
-          <h2>Upload you artwork</h2>
-          <MyDropzone userId={userId} />
-          <p>Art work card</p>
-          <StyledImageDiv>
-            {state.hasOwnProperty("items") && (
-              <DisplayArtwork userId={userId} artworks={state} />
-            )}
-          </StyledImageDiv>
+          <StyledDropZoneDiv>
+            <MyDropzone userId={userId} />
+          </StyledDropZoneDiv>
+          <hr />
+          {artworks.hasOwnProperty("items") ? (
+            <StyledImageDiv>
+              <DisplayArtwork userId={userId} artworks={artworks} />
+            </StyledImageDiv>
+          ) : (
+            <EmptyArtwork />
+          )}
         </StyledSection>
       )}
     </>

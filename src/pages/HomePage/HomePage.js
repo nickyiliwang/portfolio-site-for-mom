@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // components
-import IndividualArtModal from "../../components/IndividualArtModal/IndividualArtModal";
+import IndividualArtModal from "./components/IndividualArtModal/IndividualArtModal";
 // styles
 import {
   StyledArtworkDisplay,
@@ -16,6 +16,7 @@ import { firestore } from "../../util/firebaseApp";
 import { useAuth } from "../../util/onAuthStateChanged";
 // moment
 import moment from "moment";
+import EmptyArtwork from "../../util/EmptyArtwork";
 
 const HomePage = () => {
   const auth = useAuth();
@@ -94,7 +95,9 @@ const HomePage = () => {
     <StyledHomePage>
       {renderUserInfo()}
       <hr />
-      <StyledArtworkDisplay>{renderImages()}</StyledArtworkDisplay>
+      <StyledArtworkDisplay>
+        {userArtWorkFromDB ? renderImages() : <EmptyArtwork />}
+      </StyledArtworkDisplay>
     </StyledHomePage>
   );
 };

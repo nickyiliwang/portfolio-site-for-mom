@@ -22,6 +22,8 @@ Has login and signUp
 
 6) learn instragram layout divs/containers
 
+7) have an open route that insta/user/34JN$#5234LJKN5334 so anyone can view the project.
+
 Could: Homepage showcases other user's art
 
 Could: Should have a way to share your work, using your uid as route.

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyledFirebaseAuth } from "react-firebaseui";
-import firebase from "../../util/firebaseApp";
+import firebase from "./firebaseApp";
 
 const FirebaseAuth = () => {
   const uiConfig = {

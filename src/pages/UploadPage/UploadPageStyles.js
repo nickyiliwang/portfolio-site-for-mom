@@ -7,6 +7,10 @@ export const StyledSection = styled.section`
   padding-top: 20px;
 `;
 
+export const StyledDropZoneDiv = styled.div`
+  margin-bottom: 30px;
+`;
+
 export const StyledImageDiv = styled.div`
   width: 400px;
 `;

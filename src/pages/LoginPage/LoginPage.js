@@ -1,5 +1,5 @@
 import React from "react";
-import FirebaseAuth from "../../components/FirebaseAuth/FirebaseAuth";
+import FirebaseAuthUI from "../../util/FirebaseAuthUI";
 // styled
 import styled from "styled-components";
 import Logo from "../../assets/Momstagram Logo.png";
@@ -34,7 +34,7 @@ const LoginPage = () => {
         <div className="image-container">
           <img src={Logo} alt="LOGO" />
         </div>
-        <FirebaseAuth />
+        <FirebaseAuthUI />
       </LoginContainer>
     </StyledSection>
   );

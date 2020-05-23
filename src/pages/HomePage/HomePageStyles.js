@@ -7,8 +7,7 @@ export const StyledHomePage = styled.section`
 `;
 
 export const StyledImage = styled.div`
-  width: 300px;
-  height: 300px;
+  width: 40%;
   display: flex;
   justify-content: center;
 
@@ -20,22 +19,23 @@ export const StyledImage = styled.div`
   }
 `;
 
-export const StyledUserProfile = styled.div`
-  display: flex;
-  margin-top: 20px;
-  * {
-    margin-bottom: 10px;
-  }
-  /* align-items: center; */
-`;
-
 export const StyledUserInfo = styled.div`
+  width: 60%;
+
   margin-left: 20px;
   font-family: "Open Sans", sans-serif;
   padding-top: 20px;
 
   h2 {
     font-size: 28px;
+  }
+`;
+
+export const StyledUserProfile = styled.div`
+  display: flex;
+  margin-top: 20px;
+  * {
+    margin-bottom: 10px;
   }
 `;
 

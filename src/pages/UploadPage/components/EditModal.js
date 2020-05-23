@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Modal, Backdrop, Fade, Button } from "@material-ui/core";
 import firebase, { firestore } from "../../../util/firebaseApp";
@@ -21,18 +21,8 @@ const useStyles = makeStyles((theme) => ({
 export default function IndividualArtModal({ userId, ...props }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [newArtDetails, setNewArtDetails] = useState(null);
+  const [newArtDetails, setNewArtDetails] = useState(props);
   const { title, description, creationDate } = props;
-
-
-  // this is causing infinite loooooooooop
-  useEffect(() => {
-    function doSomething() {
-      setNewArtDetails(props);
-    }
-
-    // doSomething();
-  });
 
   const handleOpen = () => {
     setOpen(true);
@@ -70,7 +60,12 @@ export default function IndividualArtModal({ userId, ...props }) {
   const renderButtonAndModal = () => {
     return (
       <>
-        <Button variant="contained" color="primary" onClick={handleOpen}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleOpen}
+          style={{ marginRight: "8px" }}
+        >
           Edit
         </Button>
         <Modal
