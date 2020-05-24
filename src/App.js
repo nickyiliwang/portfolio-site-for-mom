@@ -10,6 +10,7 @@ import UploadPage from "./pages/UploadPage/UploadPage";
 import Header from "./components/Header/Header";
 import { ProvideAuth } from "./util/onAuthStateChanged";
 import PrivateRoute from "./util/PrivateRoute";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           </Route>
         </Switch>
       </Router>
+      <Footer />
     </ProvideAuth>
   );
 };
