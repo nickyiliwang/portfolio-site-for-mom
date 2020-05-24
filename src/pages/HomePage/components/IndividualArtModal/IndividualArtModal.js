@@ -6,8 +6,10 @@ import Fade from "@material-ui/core/Fade";
 import styled from "styled-components";
 
 const StyledOpenModalButton = styled.div`
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  max-width: 300px;
+  max-height: 300px;
+  height: auto;
   overflow: hidden;
   cursor: pointer;
   img {

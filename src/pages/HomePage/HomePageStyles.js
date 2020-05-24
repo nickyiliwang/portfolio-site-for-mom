@@ -3,7 +3,7 @@ import { wrapper } from "../../components/GlobalStyles/GlobalStyles";
 
 export const StyledHomePage = styled.section`
   ${wrapper}
-  padding-top: 80px;
+  padding: 80px 0;
 `;
 
 export const StyledImage = styled.div`
@@ -15,13 +15,12 @@ export const StyledImage = styled.div`
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    object-fit: cover;
   }
 `;
 
+// User Side
 export const StyledUserInfo = styled.div`
   width: 60%;
-
   margin-left: 20px;
   font-family: "Open Sans", sans-serif;
   padding-top: 20px;
@@ -40,10 +39,16 @@ export const StyledUserProfile = styled.div`
 `;
 
 export const StyledArtworkDisplay = styled.div`
+  margin-top: 40px;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+
+  div:nth-of-type(1),
+  div:nth-of-type(2) {
+    margin-right: 10px;
+  }
 `;
 
 export const StyledSingleArt = styled.div`
-  flex-basis: 33.33%;
+  width: 33.33%;
 `;

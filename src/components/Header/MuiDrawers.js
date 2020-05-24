@@ -50,6 +50,14 @@ const useStyles = makeStyles((theme) => ({
     width: "200px",
     height: "40px",
   },
+  toolbar: {
+    maxWidth: "1440px",
+    width: "70%",
+    margin: "0 auto",
+    [theme.breakpoints.down("1000")]: {
+      width: "100%",
+    },
+  },
 }));
 
 function MuiDrawer() {
@@ -57,47 +65,45 @@ function MuiDrawer() {
   const classes = useStyles();
 
   return (
-    <div>
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          {/* Logo */}
-          <Tooltip title="">
-            <Button className={classes.icon} component={NavLink} to="/">
-              .
+    <AppBar position="fixed" className={classes.appBar}>
+      <Toolbar className={classes.toolbar}>
+        {/* Logo */}
+        <Tooltip title="">
+          <Button className={classes.icon} component={NavLink} to="/">
+            .
+          </Button>
+        </Tooltip>
+        {/* home */}
+        <Tooltip title="Home">
+          <Button component={NavLink} to="/">
+            <HomeIcon />
+          </Button>
+        </Tooltip>
+        {/* Upload */}
+        <Tooltip title="Upload">
+          <Button component={NavLink} to="/upload">
+            <CloudUploadIcon />
+          </Button>
+        </Tooltip>
+        {auth.user ? (
+          <Tooltip title="Logout">
+            <Button
+              onClick={() => auth.signout()}
+              component={NavLink}
+              to="/login"
+            >
+              <WarningIcon />
             </Button>
           </Tooltip>
-          {/* home */}
-          <Tooltip title="Home">
-            <Button component={NavLink} to="/">
-              <HomeIcon />
+        ) : (
+          <Tooltip title="Login">
+            <Button component={NavLink} to="/login">
+              <LockOpenIcon />
             </Button>
           </Tooltip>
-          {/* Upload */}
-          <Tooltip title="Upload">
-            <Button component={NavLink} to="/upload">
-              <CloudUploadIcon />
-            </Button>
-          </Tooltip>
-          {auth.user ? (
-            <Tooltip title="Logout">
-              <Button
-                onClick={() => auth.signout()}
-                component={NavLink}
-                to="/login"
-              >
-                <WarningIcon />
-              </Button>
-            </Tooltip>
-          ) : (
-            <Tooltip title="Login">
-              <Button component={NavLink} to="/login">
-                <LockOpenIcon />
-              </Button>
-            </Tooltip>
-          )}
-        </Toolbar>
-      </AppBar>
-    </div>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 }
 

@@ -9,7 +9,6 @@ const StyledDiv = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  min-width: 80vw;
   font-weight: 200;
   height: 300px;
   border: 2px dashed #f16624;
