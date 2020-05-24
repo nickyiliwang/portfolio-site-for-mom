@@ -1,15 +1,19 @@
 import React from "react";
 import FirebaseAuthUI from "../../util/FirebaseAuthUI";
 import Logo from "../../assets/Momstagram Logo.png";
-import { LoginContainer, StyledSection } from "./LoginPageStyles";
+import {
+  LoginContainer,
+  StyledSection,
+  ImageContainer,
+} from "./LoginPageStyles";
 
 const LoginPage = () => {
   return (
     <StyledSection>
       <LoginContainer>
-        <div className="image-container">
+        <ImageContainer>
           <img src={Logo} alt="Logo" />
-        </div>
+        </ImageContainer>
         <FirebaseAuthUI />
       </LoginContainer>
     </StyledSection>
