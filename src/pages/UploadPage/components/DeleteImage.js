@@ -13,7 +13,7 @@ export default function DeleteImage({ userId, ...props }) {
     // Delete the file
     desertRef
       .delete()
-      .then(function () {
+      .then(() => {
         // File deleted successfully
         console.log("file deleted");
         // delete firestore link and info

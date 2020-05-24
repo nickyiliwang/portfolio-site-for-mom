@@ -7,6 +7,7 @@ import {
   StyledImageDiv,
   StyledSection,
   StyledDropZoneDiv,
+  StyledImagesContainer,
 } from "./UploadPageStyles";
 import EmptyArtwork from "../../util/EmptyArtwork";
 
@@ -42,9 +43,7 @@ const UploadPage = () => {
           </StyledDropZoneDiv>
           <hr />
           {artworks.hasOwnProperty("items") ? (
-            <StyledImageDiv>
-              <DisplayArtwork userId={userId} artworks={artworks} />
-            </StyledImageDiv>
+            <DisplayArtwork userId={userId} artworks={artworks} />
           ) : (
             <EmptyArtwork />
           )}

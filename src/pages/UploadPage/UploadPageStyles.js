@@ -11,6 +11,9 @@ export const StyledDropZoneDiv = styled.div`
   margin-bottom: 30px;
 `;
 
-export const StyledImageDiv = styled.div`
-  width: 400px;
+export const StyledImagesContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 `;

@@ -21,11 +21,14 @@ import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    width: 350,
     maxWidth: 345,
+    margin: "20px 0",
   },
   media: {
     height: 0,
-    paddingTop: "56.25%", // 16:9
+    paddingTop: "59.9%",
+    backgroundPosition: "top",
   },
   expand: {
     transform: "rotate(0deg)",
@@ -72,11 +75,14 @@ export default function SingleArtworkCard({ ...props }) {
           </IconButton>
         }
         title={title}
-        subheader={`Created At: ${moment(creationDate).format(
-          "MMM YYYY, Do"
-        )}`}
+        subheader={`Created At: ${moment(creationDate).format("MMM YYYY, Do")}`}
       />
-      <CardMedia className={classes.media} image={imageUrl} title={title} />
+      <CardMedia
+        className={classes.media}
+        image={imageUrl}
+        title={title}
+        media="picture"
+      />
       <CardContent>
         <Typography
           variant="body2"
