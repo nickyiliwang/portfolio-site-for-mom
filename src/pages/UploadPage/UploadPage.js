@@ -3,12 +3,7 @@ import MyDropzone from "../../components/Dropzone/DropZone";
 import { firestore } from "../../util/firebaseApp";
 import DisplayArtwork from "./components/DisplayArtwork";
 import { useAuth } from "../../util/onAuthStateChanged";
-import {
-  StyledImageDiv,
-  StyledSection,
-  StyledDropZoneDiv,
-  StyledImagesContainer,
-} from "./UploadPageStyles";
+import { StyledSection, StyledDropZoneDiv } from "./UploadPageStyles";
 import EmptyArtwork from "../../util/EmptyArtwork";
 
 const UploadPage = () => {
