@@ -22,7 +22,9 @@ Has login and signUp
 
 6) learn instragram layout divs/containers
 
-7) have an open route that insta/user/34JN$#5234LJKN5334 so anyone can view the project.
+7) have an open route that insta/user/34JN\$#5234LJKN5334 so anyone can view the project.
+
+8) ideally would be nice to sort by upload date or have user select a sorting method.
 
 Could: Homepage showcases other user's art
 

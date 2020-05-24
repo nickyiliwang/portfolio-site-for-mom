@@ -3,21 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import styled from "styled-components";
-
-const StyledOpenModalButton = styled.div`
-  width: 100%;
-  max-width: 300px;
-  max-height: 300px;
-  height: auto;
-  overflow: hidden;
-  cursor: pointer;
-  img {
-    object-fit: cover;
-    width: 300px;
-    height: 300px;
-  }
-`;
+import { StyledSingleArt, StyledOpenModalButton } from "../../HomePageStyles";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -50,7 +36,7 @@ export default function IndividualArtModal({ imageUrl, title }) {
   };
 
   return (
-    <div>
+    <StyledSingleArt>
       <StyledOpenModalButton onClick={handleOpen}>
         <img src={imageUrl} alt={title} />
       </StyledOpenModalButton>
@@ -72,6 +58,6 @@ export default function IndividualArtModal({ imageUrl, title }) {
           </div>
         </Fade>
       </Modal>
-    </div>
+    </StyledSingleArt>
   );
 }

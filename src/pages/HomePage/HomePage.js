@@ -5,7 +5,6 @@ import IndividualArtModal from "./components/IndividualArtModal/IndividualArtMod
 import {
   StyledArtworkDisplay,
   StyledImage,
-  StyledSingleArt,
   StyledUserInfo,
   StyledUserProfile,
   StyledHomePage,
@@ -71,8 +70,7 @@ const HomePage = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span>Website:</span>{" "}
-            {website === "" ? "Placeholder Google" : website}
+            {website === "" ? "https://www.MyWebsite.com" : website}
           </a>
         </StyledUserInfo>
       </StyledUserProfile>
@@ -82,11 +80,7 @@ const HomePage = () => {
   const renderImages = () => {
     if (userArtWorkFromDB) {
       return userArtWorkFromDB.map(({ id, ...props }) => {
-        return (
-          <StyledSingleArt key={id}>
-            <IndividualArtModal {...props} />
-          </StyledSingleArt>
-        );
+        return <IndividualArtModal key={id} {...props} />;
       });
     }
   };

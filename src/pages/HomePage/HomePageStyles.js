@@ -28,6 +28,12 @@ export const StyledUserInfo = styled.div`
   h2 {
     font-size: 28px;
   }
+
+  a {
+    color: rgba(var(--fe0, 0, 55, 107), 1);
+    text-decoration: none;
+    font-weight: 600;
+  }
 `;
 
 export const StyledUserProfile = styled.div`
@@ -41,14 +47,33 @@ export const StyledUserProfile = styled.div`
 export const StyledArtworkDisplay = styled.div`
   margin-top: 40px;
   display: flex;
-  flex-wrap: nowrap;
-
-  div:nth-of-type(1),
-  div:nth-of-type(2) {
-    margin-right: 10px;
-  }
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 `;
 
 export const StyledSingleArt = styled.div`
   width: 33.33%;
+`;
+
+export const StyledOpenModalButton = styled.div`
+  position: relative;
+  width: calc(100% - 8%);
+  margin: 4%;
+  height: auto;
+  overflow: hidden;
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+
+  img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
 `;
