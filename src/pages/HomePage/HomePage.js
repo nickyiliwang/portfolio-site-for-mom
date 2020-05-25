@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 // components
 import IndividualArtModal from "./components/IndividualArtModal/IndividualArtModal";
+import EditProfileImage from "./components/EditProfileImage/EditProfileImage";
 // styles
 import {
   StyledArtworkDisplay,
-  StyledImage,
+  StyledProfileImage,
   StyledUserInfo,
   StyledUserProfile,
   StyledHomePage,
+  StyledEditProfileBtn,
 } from "./HomePageStyles";
+
 // firebase
 import { firestore } from "../../util/firebaseApp";
 // auth
@@ -52,13 +55,16 @@ const HomePage = () => {
     } = userDataFromDB;
     return (
       <StyledUserProfile>
-        <StyledImage>
+        <StyledProfileImage>
           {/* this is modal should me */}
           <img
             src={photoURL ? photoURL : "http://placekitten.com/300/300"}
             alt="user profile"
           />
-        </StyledImage>
+          <StyledEditProfileBtn>
+            <EditProfileImage />
+          </StyledEditProfileBtn>
+        </StyledProfileImage>
         <StyledUserInfo>
           <h2>{userName}</h2>
           <p>{`Joined: ${moment(creationDate).fromNow()}`}</p>

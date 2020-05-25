@@ -6,15 +6,31 @@ export const StyledHomePage = styled.section`
   padding: 80px 0;
 `;
 
-export const StyledImage = styled.div`
+export const StyledEditProfileBtn = styled.div`
+  display: block;
+  position: absolute;
+  z-index: 5;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3);
+`;
+
+export const StyledProfileImage = styled.div`
   width: 40%;
   display: flex;
   justify-content: center;
+  position: relative;
+  transition-duration: 1s;
 
   img {
     width: 200px;
     height: 200px;
     border-radius: 50%;
+
+    &:hover ${StyledEditProfileBtn} & {
+      display: block;
+    }
   }
 `;
 

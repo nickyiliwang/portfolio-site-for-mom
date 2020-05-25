@@ -14,7 +14,7 @@ import Button from "@material-ui/core/Button";
 import { blue } from "@material-ui/core/colors";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import EditModal from "./EditModal";
+import EditArtModal from "./EditArtModal";
 import ImageIcon from "@material-ui/icons/Image";
 import DeleteImage from "./DeleteImage";
 import moment from "moment";
@@ -94,7 +94,7 @@ export default function SingleArtworkCard({ ...props }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <EditModal {...props} />
+        <EditArtModal {...props} />
         <DeleteImage {...props} />
         <IconButton
           className={clsx(classes.expand, {
