@@ -13,7 +13,8 @@ export const StyledEditProfileBtn = styled.div`
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.3);
+  /* background-color: rgba(0, 0, 0, 0.3); */
+  background-color: red;
 `;
 
 export const StyledProfileImage = styled.div`
@@ -22,6 +23,7 @@ export const StyledProfileImage = styled.div`
   justify-content: center;
   position: relative;
   transition-duration: 1s;
+
 
   img {
     width: 200px;

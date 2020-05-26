@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Modal, Backdrop, Fade, IconButton } from "@material-ui/core";
 // import firebase, { firestore } from "../../../../util/firebaseApp";
 import EditIcon from "@material-ui/icons/Edit";
+import { StyledEditProfileBtn } from "../../HomePageStyles";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -15,6 +16,14 @@ const useStyles = makeStyles((theme) => ({
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+  },
+  editBtn: {
+    height: '44px',
+    width: '44px',
+    position: "absolute",
+    left: "50%",
+    right: "50%",
+    transform: "translate(-50%, -50%)",
   },
 }));
 
@@ -86,15 +95,16 @@ export default function EditProfileImage() {
   };
 
   return (
-    <div>
+    <StyledEditProfileBtn>
       <IconButton
         color="primary"
         aria-label="upload picture"
         onClick={handleOpen}
+        className={classes.editBtn}
       >
         <EditIcon />
       </IconButton>
       {userId && renderModal()}
-    </div>
+    </StyledEditProfileBtn>
   );
 }

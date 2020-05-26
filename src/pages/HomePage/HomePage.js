@@ -56,14 +56,11 @@ const HomePage = () => {
     return (
       <StyledUserProfile>
         <StyledProfileImage>
-          {/* this is modal should me */}
           <img
             src={photoURL ? photoURL : "http://placekitten.com/300/300"}
             alt="user profile"
           />
-          <StyledEditProfileBtn>
-            <EditProfileImage />
-          </StyledEditProfileBtn>
+          <EditProfileImage />
         </StyledProfileImage>
         <StyledUserInfo>
           <h2>{userName}</h2>
