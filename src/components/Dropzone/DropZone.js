@@ -1,25 +1,10 @@
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import styled from "styled-components";
 import firebase, { firestore } from "../../util/firebaseApp";
 import { v4 as uuidv4 } from "uuid";
-
-const StyledDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  font-weight: 200;
-  height: 300px;
-  border: 2px dashed #f16624;
-  border-radius: 5px;
-  background: white;
-  margin: 10px 0;
-  cursor: pointer;
-`;
+import { StyledDiv } from "./DropzoneStyles";
 
 export default function MyDropzone({ userId }) {
-  // const userId = "Nick Wang's artwork";
   const onDrop = useCallback(
     (acceptedFiles) => {
       const storageRef = firebase.storage().ref();
@@ -27,7 +12,7 @@ export default function MyDropzone({ userId }) {
         if (!file.path.match(/.(jpg|jpeg|png|gif)$/i)) return;
         const artworkDbRef = firestore.collection("artwork").doc(userId);
 
-        //   // Upload the image to Cloud Storage.
+        // Upload the image to Cloud Storage.
         let filePath = `${userId}/${file.path}`;
         firebase
           .storage()
@@ -38,7 +23,7 @@ export default function MyDropzone({ userId }) {
               .child(filePath)
               .getDownloadURL()
               .then(function (url) {
-                // then uploads the download url from
+                // then uploads the download url to firestore
                 firestore
                   .collection("artwork")
                   .doc(userId)
@@ -46,7 +31,6 @@ export default function MyDropzone({ userId }) {
                   .then((doc) => {
                     if (doc.exists) {
                       artworkDbRef.update({
-                        // pushing new items into the item array
                         items: firebase.firestore.FieldValue.arrayUnion({
                           title: file.name,
                           description: "",

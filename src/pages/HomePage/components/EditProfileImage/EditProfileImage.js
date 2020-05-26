@@ -6,6 +6,14 @@ import EditIcon from "@material-ui/icons/Edit";
 import { StyledEditProfileBtn } from "../../HomePageStyles";
 
 const useStyles = makeStyles((theme) => ({
+  editBtnContainer: {
+    display: "block",
+    zIndex: 5,
+    width: "200px",
+    height: "200px",
+    borderRadius: "50%",
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+  },
   modal: {
     display: "flex",
     alignItems: "center",
@@ -18,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
   },
   editBtn: {
-    height: '44px',
-    width: '44px',
+    height: "44px",
+    width: "44px",
     position: "absolute",
     left: "50%",
     right: "50%",
@@ -95,7 +103,7 @@ export default function EditProfileImage() {
   };
 
   return (
-    <StyledEditProfileBtn>
+    <div className={classes.editBtnContainer}>
       <IconButton
         color="primary"
         aria-label="upload picture"
@@ -105,6 +113,6 @@ export default function EditProfileImage() {
         <EditIcon />
       </IconButton>
       {userId && renderModal()}
-    </StyledEditProfileBtn>
+    </div>
   );
 }

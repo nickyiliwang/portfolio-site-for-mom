@@ -69,7 +69,7 @@ const HomePage = () => {
             description === "" ? "Tell the world about yourself!" : description
           }`}</p>
           <a
-            href="http://www.google.com/"
+            href={website ? website : "http://www.google.com/"}
             target="_blank"
             rel="noopener noreferrer"
           >

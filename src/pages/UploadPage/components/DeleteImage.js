@@ -14,7 +14,6 @@ export default function DeleteImage({ userId, ...props }) {
     desertRef
       .delete()
       .then(() => {
-        // File deleted successfully
         console.log("file deleted");
         // delete firestore link and info
         const docRef = firestore.collection("artwork").doc(userId);
@@ -31,8 +30,7 @@ export default function DeleteImage({ userId, ...props }) {
 
               docRef.update({ items: updatedArtItems });
             } else {
-              // doc.data() will be undefined in this case
-              console.error("No such document!");
+              console.error("No such document!", doc.data());
             }
           })
           .catch(function (error) {
