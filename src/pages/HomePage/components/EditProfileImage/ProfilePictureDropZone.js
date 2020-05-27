@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import firebase, { firestore } from "../../../../util/firebaseApp";
-import { v4 as uuidv4 } from "uuid";
 
 const StyledDiv = styled.div`
   display: flex;

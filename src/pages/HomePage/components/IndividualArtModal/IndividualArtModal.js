@@ -21,6 +21,13 @@ const useStyles = makeStyles((theme) => ({
     width: "80%",
     margin: "0 auto",
   },
+  imageContainer: {
+    width: "30vw",
+    margin: "0 auto",
+  },
+  img: {
+    width: "100%",
+  },
 }));
 
 export default function IndividualArtModal({ imageUrl, title }) {
@@ -54,7 +61,9 @@ export default function IndividualArtModal({ imageUrl, title }) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <img src={imageUrl} alt={title} />
+            <div className={classes.imageContainer}>
+              <img src={imageUrl} alt={title} className={classes.img} />
+            </div>
           </div>
         </Fade>
       </Modal>

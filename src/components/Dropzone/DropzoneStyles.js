@@ -13,3 +13,16 @@ export const StyledDiv = styled.div`
   margin: 10px 0;
   cursor: pointer;
 `;
+
+export const StyledDropzoneTextContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  p {
+    margin-top: 20px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 20px;
+  }
+`;

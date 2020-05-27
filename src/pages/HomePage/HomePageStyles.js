@@ -6,11 +6,29 @@ export const StyledHomePage = styled.section`
   padding: 80px 0;
 `;
 
+export const StyledUserProfile = styled.div`
+  display: flex;
+  margin-top: 20px;
+  * {
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-top: 0;
+  }
+`;
+
 export const StyledProfileImageContainer = styled.div`
   width: 40%;
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 export const StyledProfileImage = styled.div`
@@ -25,6 +43,10 @@ export const StyledProfileImage = styled.div`
     height: 200px;
     border-radius: 50%;
     object-fit: cover;
+
+    @media (max-width: 500px) {
+      right: 0;
+    }
   }
 
   &:hover > div {
@@ -48,13 +70,9 @@ export const StyledUserInfo = styled.div`
     text-decoration: none;
     font-weight: 600;
   }
-`;
-
-export const StyledUserProfile = styled.div`
-  display: flex;
-  margin-top: 20px;
-  * {
-    margin-bottom: 10px;
+  @media (max-width: 500px) {
+    width: 100%;
+    margin-left: 0;
   }
 `;
 

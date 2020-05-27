@@ -2,7 +2,8 @@ import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import firebase, { firestore } from "../../util/firebaseApp";
 import { v4 as uuidv4 } from "uuid";
-import { StyledDiv } from "./DropzoneStyles";
+import { StyledDiv, StyledDropzoneTextContainer } from "./DropzoneStyles";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
 export default function MyDropzone({ userId }) {
   const onDrop = useCallback(
@@ -77,9 +78,14 @@ export default function MyDropzone({ userId }) {
     <StyledDiv {...getRootProps()}>
       <input {...getInputProps()} />
       {isDragActive ? (
-        <p>Drop the files here ...</p>
+        <StyledDropzoneTextContainer>
+          <p>Drop the files here ...</p>
+        </StyledDropzoneTextContainer>
       ) : (
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        <StyledDropzoneTextContainer>
+          <CloudUploadIcon style={{ fontSize: "60px" }} color="disabled" />
+          <p>Drag 'n' drop files here, or click to select files</p>
+        </StyledDropzoneTextContainer>
       )}
     </StyledDiv>
   );
