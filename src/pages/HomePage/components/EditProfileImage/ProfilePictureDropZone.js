@@ -16,36 +16,17 @@ const StyledDiv = styled.div`
   border-radius: 5px;
   background: white;
   cursor: pointer;
+  margin: 50px;
 `;
 
-export default function ProfilePictureDropZone({}) {
+export default function ProfilePictureDropZone({ userId }) {
   const onDrop = useCallback((acceptedFiles) => {
     const storageRef = firebase.storage().ref();
 
     acceptedFiles.forEach((file) => {
       if (!file.path.match(/.(jpg|jpeg|png|gif)$/i)) return;
 
-      const userId = `Nick Wang's artwork`;
-      const artworkDbRef = firestore.collection("artwork").doc(userId);
-
-    //   // Create an initial document to update.
-    //   var frankDocRef = db.collection("users").doc("frank");
-    //   frankDocRef.set({
-    //     name: "Frank",
-    //     favorites: { food: "Pizza", color: "Blue", subject: "recess" },
-    //     age: 12,
-    //   });
-
-    //   // To update age and favorite color:
-    //   db.collection("users")
-    //     .doc("frank")
-    //     .update({
-    //       age: 13,
-    //       "favorites.color": "Red",
-    //     })
-    //     .then(function () {
-    //       console.log("Document successfully updated!");
-    //     });
+      const profileDbRef = firestore.collection("userProfile").doc(userId);
 
       // Upload the image to Cloud Storage.
       let filePath = `${userId}/${file.path}`;
@@ -60,36 +41,13 @@ export default function ProfilePictureDropZone({}) {
             .then(function (url) {
               // then uploads the download url from
               firestore
-                .collection("artwork")
+                .collection("userProfile")
                 .doc(userId)
                 .get()
                 .then((doc) => {
                   if (doc.exists) {
-                    artworkDbRef.update({
-                      // pushing new items into the item array
-                      items: firebase.firestore.FieldValue.arrayUnion({
-                        title: file.name,
-                        description: "",
-                        creationDate: Date.now(),
-                        originalFileTitle: file.name,
-                        imageUrl: url,
-                        timeStamp: Date.now(),
-                        id: uuidv4(),
-                      }),
-                    });
-                  } else {
-                    artworkDbRef.set({
-                      items: [
-                        {
-                          title: file.name,
-                          description: "",
-                          creationDate: Date.now(),
-                          originalFileTitle: file.name,
-                          imageUrl: url,
-                          timeStamp: Date.now(),
-                          id: uuidv4(),
-                        },
-                      ],
+                    profileDbRef.update({
+                      photoURL: url,
                     });
                   }
                 })

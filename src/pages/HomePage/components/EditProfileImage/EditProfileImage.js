@@ -1,46 +1,31 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Modal, Backdrop, Fade, IconButton } from "@material-ui/core";
-// import firebase, { firestore } from "../../../../util/firebaseApp";
+import React, { useState, useEffect } from "react";
+// MUI
+import {
+  Modal,
+  Backdrop,
+  Fade,
+  IconButton,
+  Paper,
+  Tooltip,
+} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-import { StyledEditProfileBtn } from "../../HomePageStyles";
-
-const useStyles = makeStyles((theme) => ({
-  editBtnContainer: {
-    display: "block",
-    zIndex: 5,
-    width: "200px",
-    height: "200px",
-    borderRadius: "50%",
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
-  },
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-  editBtn: {
-    height: "44px",
-    width: "44px",
-    position: "absolute",
-    left: "50%",
-    right: "50%",
-    transform: "translate(-50%, -50%)",
-  },
-}));
+import CancelIcon from "@material-ui/icons/Cancel";
+import { useStyles } from "./EditProfileImageStyles";
+// components
+import ProfilePictureDropZone from "./ProfilePictureDropZone";
+import { useAuth } from "../../../../util/onAuthStateChanged";
 
 export default function EditProfileImage() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [newArtDetails, setNewArtDetails] = useState({});
+  const [userId, setUserId] = useState(null);
+  const auth = useAuth();
 
-  const userId = true;
+  useEffect(() => {
+    if (auth.user) {
+      setUserId(auth.user.uid);
+    }
+  }, [auth]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -48,32 +33,6 @@ export default function EditProfileImage() {
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleSubmit = () => {
-    console.log("clicked");
-    // const artworkDbRef = firestore.collection("artwork").doc(userId);
-    // const artWorkToRemove = { ...props };
-    // artworkDbRef
-    //   .update({
-    //     items: firebase.firestore.FieldValue.arrayRemove(artWorkToRemove),
-    //   })
-    //   .then(
-    //     artworkDbRef
-    //       .update({
-    //         items: firebase.firestore.FieldValue.arrayUnion(newArtDetails),
-    //       })
-    //       .catch((err) => console.error(err))
-    //   )
-    //   .catch(function (error) {
-    //     console.error("Error adding document: ", error);
-    //   });
-
-    setOpen(false);
-  };
-
-  const handleOnChange = (e) => {
-    setNewArtDetails({ ...newArtDetails, [e.target.name]: e.target.value });
   };
 
   const renderModal = () => {
@@ -89,14 +48,16 @@ export default function EditProfileImage() {
         }}
       >
         <Fade in={open}>
-          <div className={classes.paper}>
-            <form
-              action="#"
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-            ></form>
-          </div>
+          <Paper className={classes.paper}>
+            <IconButton
+              aria-label="Close"
+              onClick={handleClose}
+              className={classes.closeBtn}
+            >
+              <CancelIcon />
+            </IconButton>
+            <ProfilePictureDropZone userId={userId} />
+          </Paper>
         </Fade>
       </Modal>
     );
@@ -104,15 +65,21 @@ export default function EditProfileImage() {
 
   return (
     <div className={classes.editBtnContainer}>
-      <IconButton
-        color="primary"
-        aria-label="upload picture"
-        onClick={handleOpen}
-        className={classes.editBtn}
-      >
-        <EditIcon />
-      </IconButton>
-      {userId && renderModal()}
+      <Tooltip title="Edit Profile Picture">
+        <IconButton
+          color="primary"
+          aria-label="upload picture"
+          onClick={handleOpen}
+          className={classes.editBtn}
+          disableFocusRipple
+          disableRipple
+          focusRipple={false}
+          disableTouchRipple
+        >
+          <EditIcon />
+        </IconButton>
+      </Tooltip>
+      {renderModal()}
     </div>
   );
 }

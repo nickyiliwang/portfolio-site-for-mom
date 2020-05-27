@@ -5,11 +5,11 @@ import EditProfileImage from "./components/EditProfileImage/EditProfileImage";
 // styles
 import {
   StyledArtworkDisplay,
+  StyledProfileImageContainer,
   StyledProfileImage,
   StyledUserInfo,
   StyledUserProfile,
   StyledHomePage,
-  StyledEditProfileBtn,
 } from "./HomePageStyles";
 
 // firebase
@@ -55,13 +55,15 @@ const HomePage = () => {
     } = userDataFromDB;
     return (
       <StyledUserProfile>
-        <StyledProfileImage>
-          <img
-            src={photoURL ? photoURL : "http://placekitten.com/300/300"}
-            alt="user profile"
-          />
-          <EditProfileImage />
-        </StyledProfileImage>
+        <StyledProfileImageContainer>
+          <StyledProfileImage>
+            <img
+              src={photoURL ? photoURL : "http://placekitten.com/300/300"}
+              alt="user profile"
+            />
+            <EditProfileImage />
+          </StyledProfileImage>
+        </StyledProfileImageContainer>
         <StyledUserInfo>
           <h2>{userName}</h2>
           <p>{`Joined: ${moment(creationDate).fromNow()}`}</p>

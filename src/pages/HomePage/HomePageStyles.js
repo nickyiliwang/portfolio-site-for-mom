@@ -6,17 +6,29 @@ export const StyledHomePage = styled.section`
   padding: 80px 0;
 `;
 
-export const StyledProfileImage = styled.div`
+export const StyledProfileImageContainer = styled.div`
   width: 40%;
   display: flex;
+  align-items: center;
   justify-content: center;
+`;
+
+export const StyledProfileImage = styled.div`
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
   position: relative;
-  transition-duration: 1s;
 
   img {
+    position: absolute;
     width: 200px;
     height: 200px;
     border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &:hover > div {
+    visibility: visible;
   }
 `;
 
