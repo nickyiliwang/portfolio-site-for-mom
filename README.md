@@ -24,3 +24,10 @@ Has login and signUp
    Could: Homepage showcases other user's art
 
 6. ideally would be nice to sort by upload date or have user select a sorting method.
+
+## TODO
+
+1. Dropzone styles
+2. HomePage Art display modal layouts
+3. Upload page EditProfileDetails Component
+4. Sharing profile Route/Url
