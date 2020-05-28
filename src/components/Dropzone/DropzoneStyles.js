@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const StyledDiv = styled.div`
+const NormalDropzoneCss = css`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,6 +12,16 @@ export const StyledDiv = styled.div`
   background: white;
   margin: 10px 0;
   cursor: pointer;
+`;
+
+export const StyledDiv = styled.div`
+  ${NormalDropzoneCss}
+`;
+
+export const StyledPictureDiv = styled.div`
+  ${NormalDropzoneCss};
+  margin: 50px;
+  min-width: 80vw;
 `;
 
 export const StyledDropzoneTextContainer = styled.div`

@@ -1,74 +1,73 @@
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import styled from "styled-components";
 import firebase, { firestore } from "../../../../util/firebaseApp";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
-const StyledDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  min-width: 80vw;
-  font-weight: 200;
-  height: 300px;
-  border: 2px dashed #f16624;
-  border-radius: 5px;
-  background: white;
-  cursor: pointer;
-  margin: 50px;
-`;
+import {
+  StyledPictureDiv,
+  StyledDropzoneTextContainer,
+} from "../../../../components/Dropzone/DropzoneStyles";
 
-export default function ProfilePictureDropZone({ userId }) {
-  const onDrop = useCallback((acceptedFiles) => {
-    const storageRef = firebase.storage().ref();
+export default function ProfilePictureDropZone({ userId, handleClose }) {
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      const storageRef = firebase.storage().ref();
 
-    acceptedFiles.forEach((file) => {
-      if (!file.path.match(/.(jpg|jpeg|png|gif)$/i)) return;
+      acceptedFiles.forEach((file) => {
+        if (!file.path.match(/.(jpg|jpeg|png|gif)$/i)) return;
 
-      const profileDbRef = firestore.collection("userProfile").doc(userId);
+        const profileDbRef = firestore.collection("userProfile").doc(userId);
 
-      // Upload the image to Cloud Storage.
-      let filePath = `${userId}/${file.path}`;
-      firebase
-        .storage()
-        .ref(filePath)
-        .put(file)
-        .then(() => {
-          storageRef
-            .child(filePath)
-            .getDownloadURL()
-            .then(function (url) {
-              // then uploads the download url from
-              firestore
-                .collection("userProfile")
-                .doc(userId)
-                .get()
-                .then((doc) => {
-                  if (doc.exists) {
-                    profileDbRef.update({
-                      photoURL: url,
-                    });
-                  }
-                })
-                .catch(function (error) {
-                  console.error("Error adding document: ", error);
-                });
-            })
-            .catch((err) => console.error("error uploading file path", err));
-        })
-        .catch((err) => console.error("error uploading file", err));
-    });
-  }, []);
+        // Upload the image to Cloud Storage.
+        let filePath = `${userId}/ProfileImage/${file.path}`;
+        firebase
+          .storage()
+          .ref(filePath)
+          .put(file)
+          .then(() => {
+            storageRef
+              .child(filePath)
+              .getDownloadURL()
+              .then(function (url) {
+                // then uploads the download url from
+                firestore
+                  .collection("userProfile")
+                  .doc(userId)
+                  .get()
+                  .then((doc) => {
+                    if (doc.exists) {
+                      profileDbRef.update({
+                        photoURL: url,
+                      });
+                    }
+                    handleClose();
+                  })
+                  .catch(function (error) {
+                    console.error("Error adding document: ", error);
+                  });
+              })
+              .catch((err) => console.error("error uploading file path", err));
+          })
+          .catch((err) => console.error("error uploading file", err));
+      });
+    },
+    [userId, handleClose]
+  );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <StyledDiv {...getRootProps()}>
+    <StyledPictureDiv {...getRootProps()}>
       <input {...getInputProps()} />
       {isDragActive ? (
-        <p>Drop the files here ...</p>
+        <StyledDropzoneTextContainer>
+          <p>Drop the files here ...</p>
+        </StyledDropzoneTextContainer>
       ) : (
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        <StyledDropzoneTextContainer>
+          <CloudUploadIcon style={{ fontSize: "60px" }} color="disabled" />
+          <p>Drag 'n' drop files here, or click to select files</p>
+        </StyledDropzoneTextContainer>
       )}
-    </StyledDiv>
+    </StyledPictureDiv>
   );
 }

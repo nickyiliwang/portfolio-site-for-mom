@@ -56,7 +56,7 @@ export default function EditProfileImage() {
             >
               <CancelIcon />
             </IconButton>
-            <ProfilePictureDropZone userId={userId} />
+            <ProfilePictureDropZone userId={userId} handleClose={handleClose} />
           </Paper>
         </Fade>
       </Modal>

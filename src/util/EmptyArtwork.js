@@ -6,6 +6,7 @@ import { grey } from "@material-ui/core/colors";
 
 const StyledDiv = styled.div`
   width: 100%;
+  padding: 80px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;

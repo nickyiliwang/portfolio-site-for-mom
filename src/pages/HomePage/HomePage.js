@@ -95,7 +95,12 @@ const HomePage = () => {
       {renderUserInfo()}
       <hr />
       <StyledArtworkDisplay>
-        {userArtWorkFromDB ? renderImages() : <EmptyArtwork />}
+        {userArtWorkFromDB &&
+        (userArtWorkFromDB === undefined || userArtWorkFromDB.length) ? (
+          renderImages()
+        ) : (
+          <EmptyArtwork />
+        )}
       </StyledArtworkDisplay>
     </StyledHomePage>
   );

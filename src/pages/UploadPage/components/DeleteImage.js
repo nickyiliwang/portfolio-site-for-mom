@@ -25,7 +25,7 @@ export default function DeleteImage({ userId, ...props }) {
                 .data()
                 .items.slice()
                 .filter((data) => {
-                  return data.id !== art.id;
+                  return data.originalFileTitle !== art.originalFileTitle;
                 });
 
               docRef.update({ items: updatedArtItems });

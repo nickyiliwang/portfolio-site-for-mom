@@ -37,7 +37,8 @@ const UploadPage = () => {
             <MyDropzone userId={userId} />
           </StyledDropZoneDiv>
           <hr />
-          {artworks.hasOwnProperty("items") ? (
+          {artworks.hasOwnProperty("items") &&
+          (artworks.items === undefined || artworks.items.length) ? (
             <DisplayArtwork userId={userId} artworks={artworks} />
           ) : (
             <EmptyArtwork />
