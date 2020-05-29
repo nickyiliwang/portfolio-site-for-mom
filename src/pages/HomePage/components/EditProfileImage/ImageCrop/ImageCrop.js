@@ -2,22 +2,22 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
-export default function ImageCrop({ imageUrl }) {
+export default function ImageCrop({ imageFile }) {
   const [upImg, setUpImg] = useState();
   const imgRef = useRef(null);
-  const [crop, setCrop] = useState({ unit: "%", width: 30, aspect: 16 / 9 });
+  const [crop, setCrop] = useState({ unit: "%", width: 30, aspect: 1 / 1 });
   const [previewUrl, setPreviewUrl] = useState();
 
   useEffect(() => {
     const onSelectFile = (e) => {
-      if (e.target.files && e.target.files.length > 0) {
+      if (imageFile && imageFile.length > 0) {
         const reader = new FileReader();
         reader.addEventListener("load", () => setUpImg(reader.result));
-        reader.readAsDataURL(e.target.files[0]);
+        reader.readAsDataURL(imageFile[0]);
       }
     };
     onSelectFile();
-  }, [imageUrl]);
+  }, [imageFile]);
 
   const onLoad = useCallback((img) => {
     imgRef.current = img;
@@ -63,15 +63,16 @@ export default function ImageCrop({ imageUrl }) {
   };
 
   return (
-    <div className="App">
+    <div>
       <ReactCrop
         src={upImg}
         onImageLoaded={onLoad}
         crop={crop}
         onChange={(c) => setCrop(c)}
         onComplete={makeClientCrop}
+        // containing the image within the upload
+        // style={{ maxHeight: "40vh" }}
       />
-      {previewUrl && <img alt="Crop preview" src={previewUrl} />}
     </div>
   );
 }

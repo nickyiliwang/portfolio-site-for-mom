@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import firebase, { firestore } from "../../util/firebaseApp";
+import firebase, { firestore } from "../../../../util/firebaseApp";
 import { v4 as uuidv4 } from "uuid";
 import { StyledDiv, StyledDropzoneTextContainer } from "./DropzoneStyles";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";

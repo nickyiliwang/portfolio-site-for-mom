@@ -12,7 +12,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import CancelIcon from "@material-ui/icons/Cancel";
 import { useStyles } from "./EditProfileImageStyles";
 // components
-import ProfilePictureDropZone from "./ProfilePictureDropZone";
+import ProfilePictureDropZone from "./ProfilePictureDropZone/ProfilePictureDropZone";
 import { useAuth } from "../../../../util/onAuthStateChanged";
 
 export default function EditProfileImage({ imageUrl }) {

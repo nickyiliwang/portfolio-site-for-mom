@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MyDropzone from "../../components/Dropzone/DropZone";
+import MyDropzone from "./components/Dropzone/DropZone";
 import { firestore } from "../../util/firebaseApp";
 import DisplayArtwork from "./components/DisplayArtwork";
 import { useAuth } from "../../util/onAuthStateChanged";
