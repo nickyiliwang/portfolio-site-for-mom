@@ -14,10 +14,11 @@ import { useStyles } from "./EditProfileImageStyles";
 // components
 import ProfilePictureDropZone from "./ProfilePictureDropZone";
 import { useAuth } from "../../../../util/onAuthStateChanged";
+import ImageCrop from "../../../../components/ImageCrop/ImageCrop";
 
-export default function EditProfileImage() {
+export default function EditProfileImage({ imageUrl }) {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [userId, setUserId] = useState(null);
   const auth = useAuth();
 
@@ -57,6 +58,7 @@ export default function EditProfileImage() {
               <CancelIcon />
             </IconButton>
             <ProfilePictureDropZone userId={userId} handleClose={handleClose} />
+            {imageUrl && <ImageCrop imageUrl={imageUrl} />}
           </Paper>
         </Fade>
       </Modal>

@@ -11,7 +11,6 @@ import {
   StyledUserProfile,
   StyledHomePage,
 } from "./HomePageStyles";
-
 // firebase
 import { firestore } from "../../util/firebaseApp";
 // auth
@@ -61,7 +60,7 @@ const HomePage = () => {
               src={photoURL ? photoURL : "http://placekitten.com/300/300"}
               alt="user profile"
             />
-            <EditProfileImage />
+            <EditProfileImage imageUrl={photoURL} />
           </StyledProfileImage>
         </StyledProfileImageContainer>
         <StyledUserInfo>

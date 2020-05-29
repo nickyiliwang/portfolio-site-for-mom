@@ -26,6 +26,7 @@ export const StyledProfileImageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
   @media (max-width: 500px) {
     width: 100%;
   }
