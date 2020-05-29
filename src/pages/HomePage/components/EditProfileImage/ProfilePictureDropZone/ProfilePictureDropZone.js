@@ -1,12 +1,12 @@
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import firebase, { firestore } from "../../../../util/firebaseApp";
+import firebase, { firestore } from "../../../../../util/firebaseApp";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
 import {
   StyledPictureDiv,
   StyledDropzoneTextContainer,
-} from "../../../../components/Dropzone/DropzoneStyles";
+} from "../../../../UploadPage/components/Dropzone/DropzoneStyles";
 
 export default function ProfilePictureDropZone({ userId, handleClose }) {
   const onDrop = useCallback(

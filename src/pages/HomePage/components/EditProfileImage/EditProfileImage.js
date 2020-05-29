@@ -14,7 +14,6 @@ import { useStyles } from "./EditProfileImageStyles";
 // components
 import ProfilePictureDropZone from "./ProfilePictureDropZone";
 import { useAuth } from "../../../../util/onAuthStateChanged";
-import ImageCrop from "../../../../components/ImageCrop/ImageCrop";
 
 export default function EditProfileImage({ imageUrl }) {
   const classes = useStyles();
@@ -58,7 +57,6 @@ export default function EditProfileImage({ imageUrl }) {
               <CancelIcon />
             </IconButton>
             <ProfilePictureDropZone userId={userId} handleClose={handleClose} />
-            {imageUrl && <ImageCrop imageUrl={imageUrl} />}
           </Paper>
         </Fade>
       </Modal>
