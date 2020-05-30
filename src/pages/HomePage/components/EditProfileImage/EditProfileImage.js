@@ -15,7 +15,7 @@ import { useStyles } from "./EditProfileImageStyles";
 import ProfilePictureDropZone from "./ProfilePictureDropZone/ProfilePictureDropZone";
 import { useAuth } from "../../../../util/onAuthStateChanged";
 
-export default function EditProfileImage({ imageUrl }) {
+export default function EditProfileImage() {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
   const [userId, setUserId] = useState(null);

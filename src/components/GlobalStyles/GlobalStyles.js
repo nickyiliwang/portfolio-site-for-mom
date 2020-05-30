@@ -1,4 +1,4 @@
-import { css } from "styled-components";
+import styled, { css } from "styled-components";
 
 export const wrapper = css`
   max-width: 1440px;
@@ -8,4 +8,8 @@ export const wrapper = css`
   @media (max-width: 1000px) {
     width: 95%;
   }
+`;
+
+export const WrapperDiv = styled.div`
+  ${wrapper}
 `;

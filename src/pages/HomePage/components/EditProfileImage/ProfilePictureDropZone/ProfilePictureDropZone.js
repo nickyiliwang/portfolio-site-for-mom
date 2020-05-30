@@ -7,13 +7,10 @@ import ImageCrop from "../ImageCrop/ImageCrop";
 import {
   StyledPictureDiv,
   StyledDropzoneTextContainer,
+  StyledImageCropContainer
 } from "../../../../UploadPage/components/Dropzone/DropzoneStyles";
 
-export default function ProfilePictureDropZone({
-  userId,
-  handleClose,
-  imageUrl,
-}) {
+export default function ProfilePictureDropZone({ userId, handleClose }) {
   const [isCropReady, setIsCropReady] = useState(false);
   const [fileInput, setFileInput] = useState();
   const onDrop = useCallback(
@@ -35,7 +32,9 @@ export default function ProfilePictureDropZone({
   return (
     <>
       {isCropReady ? (
-        <ImageCrop imageFile={fileInput} />
+        <StyledImageCropContainer>
+          <ImageCrop imageFile={fileInput} />
+        </StyledImageCropContainer>
       ) : (
         <StyledPictureDiv {...getRootProps()}>
           <input {...getInputProps()} />

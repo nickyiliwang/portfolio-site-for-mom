@@ -2,6 +2,12 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
+import {
+  StyledCropAndPreviewContainer,
+  StyledImageCropPreviewContainer,
+  StyledImageCrop,
+} from "../../../../UploadPage/components/Dropzone/DropzoneStyles";
+
 export default function ImageCrop({ imageFile }) {
   const [upImg, setUpImg] = useState();
   const imgRef = useRef(null);
@@ -63,16 +69,23 @@ export default function ImageCrop({ imageFile }) {
   };
 
   return (
-    <div>
-      <ReactCrop
-        src={upImg}
-        onImageLoaded={onLoad}
-        crop={crop}
-        onChange={(c) => setCrop(c)}
-        onComplete={makeClientCrop}
-        // containing the image within the upload
-        // style={{ maxHeight: "40vh" }}
-      />
-    </div>
+    <StyledCropAndPreviewContainer>
+      <StyledImageCrop>
+        <ReactCrop
+          src={upImg}
+          onImageLoaded={onLoad}
+          crop={crop}
+          onChange={(c) => setCrop(c)}
+          onComplete={makeClientCrop}
+          // containing the image within the upload
+        />
+      </StyledImageCrop>
+
+      {previewUrl && (
+        <StyledImageCropPreviewContainer>
+          <img alt="Crop preview" src={previewUrl} />
+        </StyledImageCropPreviewContainer>
+      )}
+    </StyledCropAndPreviewContainer>
   );
 }

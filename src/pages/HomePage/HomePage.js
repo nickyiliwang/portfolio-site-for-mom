@@ -60,7 +60,7 @@ const HomePage = () => {
               src={photoURL ? photoURL : "http://placekitten.com/300/300"}
               alt="user profile"
             />
-            <EditProfileImage imageUrl={photoURL} />
+            <EditProfileImage />
           </StyledProfileImage>
         </StyledProfileImageContainer>
         <StyledUserInfo>
