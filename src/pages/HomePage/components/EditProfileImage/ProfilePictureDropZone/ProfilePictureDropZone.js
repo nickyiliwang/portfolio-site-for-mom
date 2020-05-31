@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import firebase, { firestore } from "../../../../../util/firebaseApp";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import ImageCrop from "../ImageCrop/ImageCrop";
 
@@ -25,18 +24,21 @@ export default function ProfilePictureDropZone({ userId, handleClose }) {
   );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-  // // upload image
-  const handleUpload = () => {
-    console.log('subed')
-    const storageRef = firebase.storage().ref();
-
+  const handleCancelUpload = () => {
+    setFileInput(null);
+    setIsCropReady(false);
   };
 
   return (
     <>
       {isCropReady ? (
         <StyledImageCropContainer>
-          <ImageCrop imageFile={fileInput} handleUpload={handleUpload} />
+          <ImageCrop
+            imageFile={fileInput}
+            userId={userId}
+            handleCancelUpload={handleCancelUpload}
+            handleClose={handleClose}
+          />
         </StyledImageCropContainer>
       ) : (
         <StyledPictureDiv {...getRootProps()}>

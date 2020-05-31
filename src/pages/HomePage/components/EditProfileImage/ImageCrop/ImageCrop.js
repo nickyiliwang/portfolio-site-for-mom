@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import { Button } from "@material-ui/core";
+import { uploadProfileImage } from "../uploadProfileImage/uploadProfileImage";
 
 import {
   StyledCropAndPreviewContainer,
@@ -9,11 +10,17 @@ import {
   StyledImageCrop,
 } from "../../../../UploadPage/components/Dropzone/DropzoneStyles";
 
-export default function ImageCrop({ imageFile }) {
+export default function ImageCrop({
+  imageFile,
+  userId,
+  handleCancelUpload,
+  handleClose,
+}) {
   const [upImg, setUpImg] = useState();
   const imgRef = useRef(null);
   const [crop, setCrop] = useState({ unit: "%", width: 30, aspect: 1 / 1 });
   const [previewUrl, setPreviewUrl] = useState();
+  const [croppedImageBlob, setCroppedImageBlob] = useState();
 
   useEffect(() => {
     const onSelectFile = (e) => {
@@ -32,7 +39,7 @@ export default function ImageCrop({ imageFile }) {
 
   const makeClientCrop = async (crop) => {
     if (imgRef.current && crop.width && crop.height) {
-      createCropPreview(imgRef.current, crop, "newFile.jpeg");
+      createCropPreview(imgRef.current, crop, "CroppedProfile.jpeg");
     }
   };
 
@@ -65,8 +72,16 @@ export default function ImageCrop({ imageFile }) {
         blob.name = fileName;
         window.URL.revokeObjectURL(previewUrl);
         setPreviewUrl(window.URL.createObjectURL(blob));
+        setCroppedImageBlob(blob);
       }, "image/jpeg");
     });
+  };
+
+  // upload image
+  const handleUpload = () => {
+    uploadProfileImage(userId, croppedImageBlob);
+    handleClose();
+    window.location.reload(false);
   };
 
   return (
@@ -86,10 +101,14 @@ export default function ImageCrop({ imageFile }) {
           <h2>Your New Profile:</h2>
           <img alt="Crop preview" src={previewUrl} />
           <div>
-            <Button variant="contained" color="secondary">
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => handleCancelUpload()}
+            >
               Cancel
             </Button>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={handleUpload}>
               Upload
             </Button>
           </div>

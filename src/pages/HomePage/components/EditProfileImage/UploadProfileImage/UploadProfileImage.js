@@ -1,8 +1,12 @@
-export const uploadProfileImage = () => {
+import firebase, { firestore } from "../../../../../util/firebaseApp";
+
+export const uploadProfileImage = (userId, file) => {
+  console.log(userId, file);
+  const storageRef = firebase.storage().ref();
   const profileDbRef = firestore.collection("userProfile").doc(userId);
 
   // Upload the image to Cloud Storage.
-  let filePath = `${userId}/ProfileImage/${file.path}`;
+  let filePath = `${userId}/ProfileImage/${file.name}`;
   firebase
     .storage()
     .ref(filePath)
@@ -23,7 +27,6 @@ export const uploadProfileImage = () => {
                   photoURL: url,
                 });
               }
-              handleClose();
             })
             .catch(function (error) {
               console.error("Error adding document: ", error);
