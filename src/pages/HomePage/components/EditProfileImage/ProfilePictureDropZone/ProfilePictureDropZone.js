@@ -7,7 +7,7 @@ import ImageCrop from "../ImageCrop/ImageCrop";
 import {
   StyledPictureDiv,
   StyledDropzoneTextContainer,
-  StyledImageCropContainer
+  StyledImageCropContainer,
 } from "../../../../UploadPage/components/Dropzone/DropzoneStyles";
 
 export default function ProfilePictureDropZone({ userId, handleClose }) {
@@ -17,23 +17,26 @@ export default function ProfilePictureDropZone({ userId, handleClose }) {
     (acceptedFile) => {
       const fileInputSource = [];
       fileInputSource.push(acceptedFile[0]);
-      // if (!fileInput[0].path.match(/.(jpg|jpeg|png|gif)$/i)) return;
-      const storageRef = firebase.storage().ref();
+      if (!fileInputSource[0].path.match(/.(jpg|jpeg|png|gif)$/i)) return;
       setFileInput(fileInputSource);
       setIsCropReady(true);
-      // // crop image
-
-      // // upload image
     },
     [userId, handleClose]
   );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
+  // // upload image
+  const handleUpload = () => {
+    console.log('subed')
+    const storageRef = firebase.storage().ref();
+
+  };
+
   return (
     <>
       {isCropReady ? (
         <StyledImageCropContainer>
-          <ImageCrop imageFile={fileInput} />
+          <ImageCrop imageFile={fileInput} handleUpload={handleUpload} />
         </StyledImageCropContainer>
       ) : (
         <StyledPictureDiv {...getRootProps()}>

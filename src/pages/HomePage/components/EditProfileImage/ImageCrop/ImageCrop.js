@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
+import { Button } from "@material-ui/core";
 
 import {
   StyledCropAndPreviewContainer,
@@ -77,13 +78,21 @@ export default function ImageCrop({ imageFile }) {
           crop={crop}
           onChange={(c) => setCrop(c)}
           onComplete={makeClientCrop}
-          // containing the image within the upload
         />
       </StyledImageCrop>
 
       {previewUrl && (
         <StyledImageCropPreviewContainer>
+          <h2>Your New Profile:</h2>
           <img alt="Crop preview" src={previewUrl} />
+          <div>
+            <Button variant="contained" color="secondary">
+              Cancel
+            </Button>
+            <Button variant="contained" color="primary">
+              Upload
+            </Button>
+          </div>
         </StyledImageCropPreviewContainer>
       )}
     </StyledCropAndPreviewContainer>
