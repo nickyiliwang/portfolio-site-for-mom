@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-// React Crop
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-// MUI
 import { Button } from "@material-ui/core";
 import { uploadProfileImage } from "../uploadProfileImage/uploadProfileImage";
 
@@ -79,7 +77,6 @@ export default function ImageCrop({
     });
   };
 
-  // upload image
   const handleUpload = () => {
     uploadProfileImage(userId, croppedImageBlob, handleClose);
   };

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// MUI
 import {
   Modal,
   Backdrop,
@@ -8,12 +7,9 @@ import {
   Paper,
   Tooltip,
 } from "@material-ui/core";
-// MUI Icons
 import EditIcon from "@material-ui/icons/Edit";
 import CancelIcon from "@material-ui/icons/Cancel";
-// MUI Styles
 import { useStyles } from "./EditProfileImageStyles";
-// components
 import ProfilePictureDropZone from "./ProfilePictureDropZone/ProfilePictureDropZone";
 import { useAuth } from "../../../../util/onAuthStateChanged";
 

@@ -16,7 +16,7 @@ export const uploadProfileImage = (userId, file, handleCloseCallback) => {
         .child(filePath)
         .getDownloadURL()
         .then(function (url) {
-          // then uploads the download url from
+          // Then uploads the download url from storage to db
           firestore
             .collection("userProfile")
             .doc(userId)

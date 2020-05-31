@@ -13,7 +13,7 @@ export default function MyDropzone({ userId }) {
         if (!file.path.match(/.(jpg|jpeg|png|gif)$/i)) return;
         const artworkDbRef = firestore.collection("artwork").doc(userId);
 
-        // Upload the image to Cloud Storage.
+        // Upload the image to Cloud Storage
         let filePath = `${userId}/${file.path}`;
         firebase
           .storage()
@@ -24,7 +24,7 @@ export default function MyDropzone({ userId }) {
               .child(filePath)
               .getDownloadURL()
               .then(function (url) {
-                // then uploads the download url to firestore
+                // Then uploads the download url to db
                 firestore
                   .collection("artwork")
                   .doc(userId)

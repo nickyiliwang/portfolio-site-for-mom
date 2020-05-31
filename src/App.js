@@ -2,11 +2,9 @@ import React from "react";
 import "./App.css";
 import "./setup.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// Pages
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import UploadPage from "./pages/UploadPage/UploadPage";
-// Component
 import Header from "./components/Header/Header";
 import { ProvideAuth } from "./util/onAuthStateChanged";
 import PrivateRoute from "./util/PrivateRoute";

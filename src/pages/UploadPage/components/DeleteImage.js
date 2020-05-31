@@ -15,7 +15,7 @@ export default function DeleteImage({ userId, ...props }) {
       .delete()
       .then(() => {
         console.log("file deleted");
-        // delete firestore link and info
+        // delete db link and info/ delete the image from db
         const docRef = firestore.collection("artwork").doc(userId);
         docRef
           .get()
@@ -33,14 +33,9 @@ export default function DeleteImage({ userId, ...props }) {
               console.error("No such document!", doc.data());
             }
           })
-          .catch(function (error) {
-            console.error("Error getting document:", error);
-          });
+          .catch((err) => console.error("Error getting document:", err));
       })
-      .catch(function (error) {
-        // Uh-oh, an error occurred!
-        console.error(error);
-      });
+      .catch((err) => console.error(err));
   };
 
   return (

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-// components
 import IndividualArtModal from "./components/IndividualArtModal/IndividualArtModal";
 import EditProfileImage from "./components/EditProfileImage/EditProfileImage";
 import UserInfo from "./components/UserInfo/UserInfo";
 import EmptyArtwork from "../../util/EmptyArtwork";
-// styles
 import {
   StyledArtworkDisplay,
   StyledProfileImageContainer,
@@ -12,9 +10,7 @@ import {
   StyledUserProfile,
   StyledHomePage,
 } from "./HomePageStyles";
-// firebase
 import { firestore } from "../../util/firebaseApp";
-// auth
 import { useAuth } from "../../util/onAuthStateChanged";
 
 const HomePage = () => {

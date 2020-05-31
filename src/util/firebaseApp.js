@@ -3,7 +3,6 @@ import "firebase/firestore";
 import "firebase/auth";
 import "firebase/storage";
 
-// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBpXkOZr_H8JmaZtjUm8tsMau70BPbpoQQ",
   authDomain: "portfolio-site-e8245.firebaseapp.com",
@@ -14,7 +13,6 @@ const firebaseConfig = {
   appId: "1:680054723703:web:2cd4cf251d7f365599a272",
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
