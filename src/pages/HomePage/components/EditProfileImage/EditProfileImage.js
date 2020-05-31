@@ -17,7 +17,7 @@ import { useAuth } from "../../../../util/onAuthStateChanged";
 
 export default function EditProfileImage() {
   const classes = useStyles();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState(null);
   const auth = useAuth();
 
