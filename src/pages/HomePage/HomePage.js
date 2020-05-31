@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 // components
 import IndividualArtModal from "./components/IndividualArtModal/IndividualArtModal";
 import EditProfileImage from "./components/EditProfileImage/EditProfileImage";
+import UserInfo from "./components/UserInfo/UserInfo";
+import EmptyArtwork from "../../util/EmptyArtwork";
 // styles
 import {
   StyledArtworkDisplay,
   StyledProfileImageContainer,
   StyledProfileImage,
-  StyledUserInfo,
   StyledUserProfile,
   StyledHomePage,
 } from "./HomePageStyles";
@@ -15,9 +16,6 @@ import {
 import { firestore } from "../../util/firebaseApp";
 // auth
 import { useAuth } from "../../util/onAuthStateChanged";
-// moment
-import moment from "moment";
-import EmptyArtwork from "../../util/EmptyArtwork";
 
 const HomePage = () => {
   const auth = useAuth();
@@ -45,13 +43,7 @@ const HomePage = () => {
   }, [auth]);
 
   const renderUserInfo = () => {
-    const {
-      userName = "",
-      description = "",
-      creationDate,
-      photoURL,
-      website,
-    } = userDataFromDB;
+    const { photoURL } = userDataFromDB;
     return (
       <StyledUserProfile>
         <StyledProfileImageContainer>
@@ -63,20 +55,7 @@ const HomePage = () => {
             <EditProfileImage />
           </StyledProfileImage>
         </StyledProfileImageContainer>
-        <StyledUserInfo>
-          <h2>{userName}</h2>
-          <p>{`Joined: ${moment(creationDate).fromNow()}`}</p>
-          <p>{`Description: ${
-            description === "" ? "Tell the world about yourself!" : description
-          }`}</p>
-          <a
-            href={website ? website : "http://www.google.com/"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {website === "" ? "https://www.MyWebsite.com" : website}
-          </a>
-        </StyledUserInfo>
+        <UserInfo userDataFromDB={userDataFromDB} />
       </StyledUserProfile>
     );
   };

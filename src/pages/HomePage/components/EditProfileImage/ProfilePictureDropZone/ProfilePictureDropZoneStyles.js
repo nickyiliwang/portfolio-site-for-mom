@@ -30,11 +30,12 @@ export const StyledDropzoneTextContainer = styled.div`
 `;
 
 export const StyledImageCropContainer = styled.div`
+  ${flexCenter}
+
   margin: 50px;
   min-height: 60vh;
   min-width: 80vw;
   @media (max-width: 800px) {
-    ${flexCenter}
     flex-direction: column;
     margin: 40px 0;
   }

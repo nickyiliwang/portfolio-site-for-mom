@@ -40,6 +40,8 @@ function useProvideAuth() {
         const photoURL = user.photoURL;
         const profileDbRef = firestore.collection("userProfile").doc(uid);
 
+        document.title = `Momstagram (@${displayName})`;
+
         profileDbRef.get().then((doc) => {
           if (!doc.exists) {
             profileDbRef.set({

@@ -3,7 +3,7 @@ import { wrapper } from "../../components/GlobalStyles/GlobalStyles";
 
 export const StyledHomePage = styled.section`
   ${wrapper}
-  padding: 80px 0;
+  padding: 80px 0 30px 0;
 `;
 
 export const StyledUserProfile = styled.div`
@@ -52,28 +52,6 @@ export const StyledProfileImage = styled.div`
 
   &:hover > div {
     visibility: visible;
-  }
-`;
-
-// User Side
-export const StyledUserInfo = styled.div`
-  width: 60%;
-  margin-left: 20px;
-  font-family: "Open Sans", sans-serif;
-  padding-top: 20px;
-
-  h2 {
-    font-size: 28px;
-  }
-
-  a {
-    color: rgba(var(--fe0, 0, 55, 107), 1);
-    text-decoration: none;
-    font-weight: 600;
-  }
-  @media (max-width: 500px) {
-    width: 100%;
-    margin-left: 0;
   }
 `;
 

@@ -29,7 +29,7 @@ export const StyledImageCropPreviewContainer = styled.div`
 `;
 
 export const StyledCropAndPreviewContainer = styled.div`
-  display: flex;
+  ${flexCenter}
   justify-content: space-evenly;
   flex-direction: row;
   border: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
