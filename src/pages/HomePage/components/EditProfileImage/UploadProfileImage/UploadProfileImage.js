@@ -23,7 +23,7 @@ export const uploadProfileImage = (userId, file, handleCloseCallback) => {
             .get()
             .then((doc) => {
               if (doc.exists) {
-                profileDbRef.set({
+                profileDbRef.update({
                   photoURL: url,
                 });
 

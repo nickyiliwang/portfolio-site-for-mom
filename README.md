@@ -31,4 +31,3 @@ Has login and signUp
 2. HomePage Art display modal layouts
 3. Upload page EditProfileDetails Component
 4. Sharing profile Route/Url
-5. FirebaseDB Security Rules

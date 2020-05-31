@@ -10,6 +10,12 @@ export const wrapper = css`
   }
 `;
 
+export const flexCenter = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const WrapperDiv = styled.div`
   ${wrapper}
 `;

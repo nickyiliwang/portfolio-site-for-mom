@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
+// React Crop
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
+// MUI
 import { Button } from "@material-ui/core";
 import { uploadProfileImage } from "../uploadProfileImage/uploadProfileImage";
 
@@ -8,7 +10,7 @@ import {
   StyledCropAndPreviewContainer,
   StyledImageCropPreviewContainer,
   StyledImageCrop,
-} from "../../../../UploadPage/components/Dropzone/DropzoneStyles";
+} from "./ImageCropStyles";
 
 export default function ImageCrop({
   imageFile,

@@ -7,7 +7,7 @@ import {
   StyledPictureDiv,
   StyledDropzoneTextContainer,
   StyledImageCropContainer,
-} from "../../../../UploadPage/components/Dropzone/DropzoneStyles";
+} from "./ProfilePictureDropZoneStyles";
 
 export default function ProfilePictureDropZone({ userId, handleClose }) {
   const [isCropReady, setIsCropReady] = useState(false);
