@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import "./setup.css";
+import { Reset } from "styled-reset";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -13,6 +13,7 @@ import Footer from "./components/Footer/Footer";
 const App = () => {
   return (
     <ProvideAuth>
+      <Reset />
       <Router>
         <Header />
         <Switch>

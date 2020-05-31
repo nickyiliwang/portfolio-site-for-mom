@@ -12,16 +12,13 @@ import {
 export default function ProfilePictureDropZone({ userId, handleClose }) {
   const [isCropReady, setIsCropReady] = useState(false);
   const [fileInput, setFileInput] = useState();
-  const onDrop = useCallback(
-    (acceptedFile) => {
-      const fileInputSource = [];
-      fileInputSource.push(acceptedFile[0]);
-      if (!fileInputSource[0].path.match(/.(jpg|jpeg|png|gif)$/i)) return;
-      setFileInput(fileInputSource);
-      setIsCropReady(true);
-    },
-    [userId, handleClose]
-  );
+  const onDrop = useCallback((acceptedFile) => {
+    const fileInputSource = [];
+    fileInputSource.push(acceptedFile[0]);
+    if (!fileInputSource[0].path.match(/.(jpg|jpeg|png|gif)$/i)) return;
+    setFileInput(fileInputSource);
+    setIsCropReady(true);
+  }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const handleCancelUpload = () => {
