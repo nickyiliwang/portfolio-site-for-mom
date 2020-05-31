@@ -49,7 +49,7 @@ export const StyledImageCropContainer = styled.div`
 
 export const StyledCropAndPreviewContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-direction: row;
   border: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
 

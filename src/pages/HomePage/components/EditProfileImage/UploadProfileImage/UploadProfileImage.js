@@ -1,6 +1,6 @@
 import firebase, { firestore } from "../../../../../util/firebaseApp";
 
-export const uploadProfileImage = (userId, file) => {
+export const uploadProfileImage = (userId, file, handleCloseCallback) => {
   console.log(userId, file);
   const storageRef = firebase.storage().ref();
   const profileDbRef = firestore.collection("userProfile").doc(userId);
@@ -23,9 +23,12 @@ export const uploadProfileImage = (userId, file) => {
             .get()
             .then((doc) => {
               if (doc.exists) {
-                profileDbRef.update({
+                profileDbRef.set({
                   photoURL: url,
                 });
+
+                handleCloseCallback();
+                window.location.reload(false);
               }
             })
             .catch(function (error) {

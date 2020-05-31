@@ -79,9 +79,7 @@ export default function ImageCrop({
 
   // upload image
   const handleUpload = () => {
-    uploadProfileImage(userId, croppedImageBlob);
-    handleClose();
-    window.location.reload(false);
+    uploadProfileImage(userId, croppedImageBlob, handleClose);
   };
 
   return (

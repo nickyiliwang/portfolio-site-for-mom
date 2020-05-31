@@ -27,7 +27,7 @@ Has login and signUp
 
 ## TODO
 
-1. Dropzone styles
+1. Reorganize Css
 2. HomePage Art display modal layouts
 3. Upload page EditProfileDetails Component
 4. Sharing profile Route/Url
