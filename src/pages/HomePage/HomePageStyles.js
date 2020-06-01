@@ -8,10 +8,7 @@ export const StyledHomePage = styled.section`
 
 export const StyledUserProfile = styled.div`
   display: flex;
-  margin-top: 20px;
-  * {
-    margin-bottom: 10px;
-  }
+  margin: 20px 0;
 
   @media (max-width: 500px) {
     flex-direction: column;

@@ -9,7 +9,7 @@ export const uploadProfileImage = (userId, file, handleCloseCallback) => {
   let filePath = `${userId}/ProfileImage/${file.name}`;
   firebase
     .storage()
-    .ref(filePath)
+  .ref(filePath)
     .put(file)
     .then(() => {
       storageRef
