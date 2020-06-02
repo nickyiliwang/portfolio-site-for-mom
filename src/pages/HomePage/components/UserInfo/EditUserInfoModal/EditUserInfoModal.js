@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Grid, TextField } from "@material-ui/core";
-import firebase, { firestore } from "../../../../../util/firebaseApp";
+import { firestore } from "../../../../../util/firebaseApp";
 import DescriptionIcon from "@material-ui/icons/Description";
 import LanguageIcon from "@material-ui/icons/Language";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";

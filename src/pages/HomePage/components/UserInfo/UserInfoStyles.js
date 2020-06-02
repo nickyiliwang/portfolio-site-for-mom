@@ -18,12 +18,6 @@ export const StyledUserInfo = styled.div`
     font-weight: 600;
   }
 
-  div {
-    button {
-      margin-left: 5px;
-    }
-  }
-
   @media (max-width: 500px) {
     width: 100%;
     margin-left: 0;
@@ -44,6 +38,10 @@ export const Username = styled.div`
     background: rgba(var(--d69, 0, 149, 246), 1);
     padding: 5px 9px;
     text-transform: capitalize;
+  }
+
+  @media (max-width: 500px) {
+    justify-content: center;
   }
 `;
 
