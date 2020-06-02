@@ -1,18 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Modal,
-  Backdrop,
-  Fade,
-  Button,
-  Grid,
-  TextField,
-  IconButton,
-} from "@material-ui/core";
+import { Button, Grid, TextField } from "@material-ui/core";
 import firebase, { firestore } from "../../../../../util/firebaseApp";
-import BrushIcon from "@material-ui/icons/Brush";
 import DescriptionIcon from "@material-ui/icons/Description";
-import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import LanguageIcon from "@material-ui/icons/Language";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
@@ -34,18 +24,12 @@ const useStyles = makeStyles((theme) => ({
   },
   margin: {
     margin: theme.spacing(5),
+    "& .MuiGrid-item": {
+      marginBottom: "20px",
+    },
   },
   submitBtn: {
-    marginTop: "20px",
-  },
-  imageContainer: {
-    width: "300px",
-    maxHeight: "300px",
-    overflow: "hidden",
-    marginBottom: 30,
-  },
-  img: {
-    borderRadius: "3px",
+    marginTop: "15px",
   },
   closeBtn: {
     position: "absolute",
@@ -59,27 +43,27 @@ export default function EditUserInfoModal({
   userDataFromDB,
   handleClose,
 }) {
-  const [newUserDetails, setNewUserDetails] = useState(userDataFromDB);
+  const [newUserDetails, setNewUserDetails] = useState();
   const classes = useStyles();
-  const { userName, description } = userDataFromDB;
+
+  useEffect(() => {
+    setNewUserDetails(userDataFromDB);
+  }, [userDataFromDB]);
+
+  const { userName, description, website } = userDataFromDB;
+
   const handleSubmit = () => {
-    // const artworkDbRef = firestore.collection("artwork").doc(userId);
-    // const artWorkToRemove = { ...props };
-    // artworkDbRef
-    //   .update({
-    //     items: firebase.firestore.FieldValue.arrayRemove(artWorkToRemove),
-    //   })
-    //   .then(
-    //     artworkDbRef
-    //       .update({
-    //         items: firebase.firestore.FieldValue.arrayUnion(newArtDetails),
-    //       })
-    //       .catch((err) => console.error(err))
-    //   )
-    //   .catch(function (error) {
-    //     console.error("Error adding document: ", error);
-    //   });
-    handleClose();
+    const profileDbRef = firestore.collection("userProfile").doc(userId);
+    profileDbRef
+      .update(newUserDetails)
+      .then(() => {
+        console.log("updated");
+        handleClose();
+        window.location.reload(false);
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
   };
 
   const handleOnChange = (e) => {
@@ -103,7 +87,7 @@ export default function EditUserInfoModal({
               <Grid item>
                 <TextField
                   label="Edit Display Name"
-                  name="title"
+                  name="userName"
                   type="text"
                   defaultValue={userName}
                   onChange={handleOnChange}
@@ -116,6 +100,7 @@ export default function EditUserInfoModal({
               </Grid>
               <Grid item>
                 <TextField
+                  multiline
                   label="Edit Description"
                   name="description"
                   type="text"
@@ -130,19 +115,21 @@ export default function EditUserInfoModal({
             </Grid>
             <Grid container spacing={1} alignItems="flex-end">
               <Grid item>
-                <CalendarTodayIcon />
+                <LanguageIcon />
               </Grid>
               <Grid item>
                 <TextField
-                  label="Edit Creation Date"
-                  name="creationDate"
-                  type="text"
-                  // defaultValue={moment(creationDate).format("YYYY-MM-DD")}
+                  label="Website"
+                  name="website"
+                  type="url"
+                  placeholder="https://example.com"
+                  pattern="https://.*"
+                  defaultValue={website}
                   onChange={handleOnChange}
                 />
               </Grid>
             </Grid>
-            {userDataFromDB && (
+            {userId && (
               <Grid container spacing={1}>
                 <Grid item>
                   <Button

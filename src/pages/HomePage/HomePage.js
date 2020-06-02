@@ -23,6 +23,7 @@ const HomePage = () => {
       const profileDbRef = firestore
         .collection("userProfile")
         .doc(auth.user.uid);
+
       profileDbRef.get().then((res) => {
         if (res.data()) {
           setUserDataFromDB(res.data());

@@ -18,6 +18,10 @@ export const StyledUserInfo = styled.div`
     font-weight: 600;
   }
 
+  div {
+    margin: 10px 0;
+  }
+
   @media (max-width: 500px) {
     width: 100%;
     margin-left: 0;
@@ -40,8 +44,6 @@ export const Username = styled.div`
     text-transform: capitalize;
   }
 `;
-
-
 
 export const useStyles = makeStyles(() => ({
   editBtnContainer: {

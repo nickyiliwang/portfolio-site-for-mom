@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { StyledUserInfo, Username } from "./UserInfoStyles";
 import { Button } from "@material-ui/core";
 import moment from "moment";
@@ -17,7 +18,7 @@ import EditUserInfoModal from "./EditUserInfoModal/EditUserInfoModal";
 
 export default function UserInfo({ userDataFromDB }) {
   const classes = useStyles();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState(null);
   const auth = useAuth();
   const {
@@ -25,6 +26,7 @@ export default function UserInfo({ userDataFromDB }) {
     description = "",
     website,
     creationDate,
+    uid,
   } = userDataFromDB;
 
   useEffect(() => {
@@ -84,7 +86,7 @@ export default function UserInfo({ userDataFromDB }) {
         </Tooltip>
       </Username>
       <p>{`Joined: ${moment(creationDate).fromNow()}`}</p>
-      <p>{`Description: ${
+      <p>{`${
         description === "" ? "Tell the world about yourself!" : description
       }`}</p>
       <a
@@ -94,6 +96,18 @@ export default function UserInfo({ userDataFromDB }) {
       >
         {website === "" ? "https://www.MyWebsite.com" : website}
       </a>
+
+      <div>
+        <Link
+          to={{
+            pathname: `/user/${uid}`,
+          }}
+          target="_blank"
+        >
+          {`@${userName}`}
+        </Link>
+      </div>
+
       {renderModal()}
     </StyledUserInfo>
   );
