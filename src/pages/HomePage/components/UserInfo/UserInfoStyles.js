@@ -19,7 +19,9 @@ export const StyledUserInfo = styled.div`
   }
 
   div {
-    margin: 10px 0;
+    button {
+      margin-left: 5px;
+    }
   }
 
   @media (max-width: 500px) {

@@ -10,15 +10,19 @@ import {
   IconButton,
   Paper,
   Tooltip,
+  ClickAwayListener,
 } from "@material-ui/core";
 import CancelIcon from "@material-ui/icons/Cancel";
 import { useStyles } from "./UserInfoStyles";
 import { useAuth } from "../../../../util/onAuthStateChanged";
 import EditUserInfoModal from "./EditUserInfoModal/EditUserInfoModal";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
 
 export default function UserInfo({ userDataFromDB }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [openToolTip, setOpenToolTip] = React.useState(false);
+
   const [userId, setUserId] = useState(null);
   const auth = useAuth();
   const {
@@ -41,6 +45,21 @@ export default function UserInfo({ userDataFromDB }) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleTooltipClose = () => {
+    setOpenToolTip(false);
+  };
+
+  const handleOnCopyClick = () => {
+    setOpenToolTip(true);
+
+    const el = document.createElement("textarea");
+    el.value = `${window.location.href}/user/${uid}`;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
   };
 
   const renderModal = () => {
@@ -106,6 +125,24 @@ export default function UserInfo({ userDataFromDB }) {
         >
           {`@${userName}`}
         </Link>
+
+        <ClickAwayListener onClickAway={handleTooltipClose}>
+          <Tooltip
+            PopperProps={{
+              disablePortal: true,
+            }}
+            onClose={handleTooltipClose}
+            open={openToolTip}
+            disableFocusListener
+            disableHoverListener
+            disableTouchListener
+            title="Copied!"
+          >
+            <IconButton onClick={handleOnCopyClick}>
+              {uid && <FileCopyIcon fontSize="small" />}
+            </IconButton>
+          </Tooltip>
+        </ClickAwayListener>
       </div>
 
       {renderModal()}
