@@ -13,21 +13,26 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
 
     maxWidth: "1440px",
     width: "80%",
     margin: "0 auto",
+    
+    display: "flex",
+    flexDirection: "row",
   },
   imageContainer: {
-    width: "30vw",
-    margin: "0 auto",
+    width: "90%",
+    padding: "20px 0",
   },
   img: {
-    width: "100%",
+    maxWidth: "900px",
+    maxHeight: "80vh",
+    height: "auto",
   },
+  contentContainer: {},
 }));
 
 export default function IndividualArtModal({ imageUrl, title }) {
@@ -63,6 +68,9 @@ export default function IndividualArtModal({ imageUrl, title }) {
           <div className={classes.paper}>
             <div className={classes.imageContainer}>
               <img src={imageUrl} alt={title} className={classes.img} />
+            </div>
+            <div className={classes.contentContainer}>
+              <h2>{title}</h2>
             </div>
           </div>
         </Fade>
