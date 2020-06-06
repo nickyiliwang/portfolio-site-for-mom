@@ -4,6 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { StyledSingleArt, StyledOpenModalButton } from "../../HomePageStyles";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -17,25 +18,33 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
 
     maxWidth: "1440px",
-    width: "80%",
     margin: "0 auto",
-    
+
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
+    fontFamily: "Open Sans, sans-serif",
+    lineHeight: "20px",
   },
   imageContainer: {
-    width: "90%",
-    padding: "20px 0",
+    padding: "20px 0 0 0",
+    maxHeight: "80vh",
   },
   img: {
     maxWidth: "900px",
     maxHeight: "80vh",
     height: "auto",
   },
-  contentContainer: {},
+  contentContainer: {
+    padding: "20px 0 0 0",
+  },
 }));
 
-export default function IndividualArtModal({ imageUrl, title }) {
+export default function IndividualArtModal({
+  imageUrl,
+  title,
+  description,
+  creationDate,
+}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -70,7 +79,14 @@ export default function IndividualArtModal({ imageUrl, title }) {
               <img src={imageUrl} alt={title} className={classes.img} />
             </div>
             <div className={classes.contentContainer}>
-              <h2>{title}</h2>
+              <h2>Title: {title}</h2>
+              <h3>{`Created At: ${moment(creationDate).format(
+                "MMM YYYY, Do"
+              )}`}</h3>
+              <p>
+                Description:
+                {description ? description : "Please Add Some Description"}
+              </p>
             </div>
           </div>
         </Fade>
